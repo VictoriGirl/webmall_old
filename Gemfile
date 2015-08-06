@@ -18,6 +18,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'rubocop', '~> 0.33.0', require: false
+gem 'devise', '~> 3.5.1'
 
 group :development, :test do
   gem 'web-console', '~> 2.0'
