@@ -1,9 +1,18 @@
+# UsersController
 class UsersController < ApplicationController
-  before_action :authenticate_user!
-  
+  before_action :authenticate_user!
+
   def new
-    @user = User.create(set_params)
-  end
+    @resource = User.create(resource_params)
+  end
+
+  def update
+    @resource.update(resource_params)
+  end
+
+  def delete
+    @resource.destroy
+  end
 
   private
 
