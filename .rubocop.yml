@@ -1,0 +1,21 @@
+AllCops:
+  RunRailsCops: true
+  Exclude:
+    - bin/**/*
+    - db/**/*
+    - config/initializers/carrierwave.rb
+    - test/test_helper.rb
+    - app/controllers/application_controller.rb
+    - app/helpers/application_helper.rb
+
+Style/DoubleNegation:
+  Enabled: false
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 200
+
+Metrics/AbcSize:
+  Max: 22
