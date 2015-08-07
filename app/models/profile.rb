@@ -1,3 +1,4 @@
+# Profile
 class Profile
   include Mongoid::Document
 

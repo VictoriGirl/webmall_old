@@ -1,5 +1,5 @@
+# ProfilesController
 class ProfilesController < ApplicationController
-
   def new
   end
 
