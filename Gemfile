@@ -14,6 +14,7 @@ gem 'twitter-bootstrap-rails', '~> 3.2.0'
 gem 'bootstrap-will_paginate', '~> 0.0.10'
 
 gem 'haml', '~> 4.0.6'
+gem "erb2haml", :group => :development
 
 gem 'jquery-rails'
 gem 'turbolinks'
@@ -22,6 +23,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'rubocop', '~> 0.33.0', require: false
 gem 'devise', '~> 3.5.1'
+gem 'devise-bootstrap-views', '~> 0.0.5'
 
 group :development, :test do
   gem 'web-console', '~> 2.0'
