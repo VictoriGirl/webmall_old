@@ -6,5 +6,4 @@ class Profile
   field :date_of_birth, type: Integer # in ms
 
   has_one :user
-
 end
