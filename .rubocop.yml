@@ -5,7 +5,6 @@ AllCops:
     - db/**/*
     - config/initializers/carrierwave.rb
     - test/test_helper.rb
-    - app/controllers/application_controller.rb
     - app/helpers/application_helper.rb
 
 Style/DoubleNegation:
