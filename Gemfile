@@ -15,6 +15,7 @@ gem 'bootstrap-will_paginate', '~> 0.0.10'
 
 gem 'haml', '~> 4.0.6'
 gem 'erb2haml', group: :development
+gem 'simple_form', '~> 3.1.0'
 
 gem 'jquery-rails'
 gem 'turbolinks'
