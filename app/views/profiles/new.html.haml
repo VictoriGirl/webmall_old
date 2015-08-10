@@ -1,7 +1,7 @@
 %p Welcome!
 %p This is mall where you can sell online!
 %p Please, fill up your profile!
-= simple_form_for Profile.new do |f|
+= simple_form_for @resource do |f|
 	%p
 		= f.input :first_name, as: :string, label: 'First name'
 	%p

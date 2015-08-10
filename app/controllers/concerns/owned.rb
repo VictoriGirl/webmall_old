@@ -1,3 +1,4 @@
+# Owned
 module Owned
-	before_action :authenticate_user!
+  before_action :authenticate_user!
 end
