@@ -1,12 +1,12 @@
 %p Welcome!
 %p This is mall where you can sell online!
 %p Please, fill up your profile!
-= simple_form_for @resource do |f|
+= simple_form_for :profile do |f|
 	%p
 		= f.input :first_name, as: :string, label: 'First name'
 	%p
 		= f.input :last_name, as: :string, label: 'Last name'
 	%p
-		= f.input :date_of_birth, as: :integer, label: 'Date of birth'
+		= f.input :date_of_birth, as: :date, start_year: (Date.today.year - 90), end_year: Date.today.year, label: 'Date of birth'
 	%p
-		= f.submit
+		= f.button :submit

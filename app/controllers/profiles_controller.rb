@@ -1,14 +1,14 @@
 # ProfilesController
 class ProfilesController < ApplicationController
+  before_action :authenticate_user!, :load_user
   before_action :load_resource, only: :show
 
   def new
-    @resource = Profile.new
   end
 
   def create
-    @resource = Profile.create(set_params)
-    render @resource
+    @resource = Profile.create(set_params.merge(user: @user))
+    @resource.present? ? (redirect_to @resource) : (render :new)
   end
 
   def show
@@ -17,8 +17,12 @@ class ProfilesController < ApplicationController
 
   private
 
+  def load_user
+    @user = current_user
+  end
+
   def load_resource
-    @resource = current_user.profile
+    @resource = params[:id]
   end
 
   def set_params

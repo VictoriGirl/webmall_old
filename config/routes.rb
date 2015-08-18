@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  root 'profiles#show'
+  root 'mainpages#index'
 
   devise_for :users
-  resource :profiles
+  get '/mainpages/', to: 'mainpages#index'
+  resources :profiles
 end
