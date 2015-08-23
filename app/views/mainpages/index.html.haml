@@ -1,4 +1,18 @@
-%p
-	Hello!
-%p
-	This is my WebMall
+%div.container-fluid
+	%div.row
+		%div.col-md-8
+			Hello
+		%div.col-md-4
+			%div.row
+				= form_tag session_path(:user) do
+					%p
+						= text_field_tag 'user[email]'
+					%p					
+						= password_field_tag 'user[password]'
+					%p
+						= check_box_tag 'user[remember_me]'
+						= label_tag 'user[remember_me]', 'Remember me'
+					%p
+						= submit_tag 'Sign in'
+				%p
+					= link_to "Forgot your password?", new_password_path(:user)

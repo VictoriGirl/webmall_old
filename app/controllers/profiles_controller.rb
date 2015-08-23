@@ -8,7 +8,7 @@ class ProfilesController < ApplicationController
 
   def create
     @resource = Profile.create(set_params.merge(user: @user))
-    @resource.present? ? (redirect_to @resource) : (render :new)
+    @resource.present? ? (redirect_to @resource) : (render new_profile_path)
   end
 
   def show
@@ -22,10 +22,12 @@ class ProfilesController < ApplicationController
   end
 
   def load_resource
-    @resource = params[:id]
+    @resource = Profile.find(params[:id])
   end
 
   def set_params
-    params.require(:profile).permit(:first_name, :last_name, :date_of_birth)
+    p = params.require(:profile).permit(:first_name, :last_name, :date_of_birth)
+    p[:date_of_birth] = Time.zone.parse(p[:date_of_birth])
+    p
   end
 end

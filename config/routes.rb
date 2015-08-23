@@ -3,5 +3,5 @@ Rails.application.routes.draw do
 
   devise_for :users
   get '/mainpages/', to: 'mainpages#index'
-  resources :profiles
+  resources :profiles, except: :index
 end
