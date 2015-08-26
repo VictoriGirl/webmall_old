@@ -1,9 +1,9 @@
 # ProfilesController
 class ProfilesController < ApplicationController
   before_action :authenticate_user!, :load_user
-  before_action :load_resource, only: [:show, :update]
+  before_action :load_resource, only: [:show, :update, :edit]
 
-  def new
+  def edit
   end
 
   def update
