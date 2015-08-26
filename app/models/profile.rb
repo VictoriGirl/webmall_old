@@ -6,5 +6,5 @@ class Profile
   field :last_name, type: String
   field :date_of_birth, type: Date
 
-  belongs_to :user
+  embedded_in :user
 end
