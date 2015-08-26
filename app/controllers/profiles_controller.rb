@@ -1,18 +1,17 @@
 # ProfilesController
 class ProfilesController < ApplicationController
   before_action :authenticate_user!, :load_user
-  before_action :load_resource, only: :show
+  before_action :load_resource, only: [:show, :update]
 
   def new
   end
 
-  def create
-    @resource = Profile.create(set_params.merge(user: @user))
-    @resource.present? ? (redirect_to @resource) : (render new_profile_path)
+  def update
+    @resource.update(set_params) ? (redirect_to @resource) : (render new_profile_path)
   end
 
   def show
-    render :new if @resource.blank?
+    render :new if @resource.first_name.blank?
   end
 
   private
@@ -22,7 +21,7 @@ class ProfilesController < ApplicationController
   end
 
   def load_resource
-    @resource = Profile.find(params[:id])
+    @resource = @user.profile
   end
 
   def set_params

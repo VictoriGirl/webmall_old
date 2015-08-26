@@ -1,7 +1,7 @@
 %p Welcome!
 %p This is mall where you can sell online!
 %p Please, fill up your profile!
-= simple_form_for :profile, url: profiles_path, method: :post do |f|
+= simple_form_for :profile, url: profile_path, method: :put do |f|
 	%p
 		= f.input :first_name, as: :string, label: 'First name'
 	%p
