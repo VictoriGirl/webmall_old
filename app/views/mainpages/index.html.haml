@@ -1,20 +1,21 @@
 %div.container-fluid
 	%div.row
 		%div.col-md-8
-			Hello
+			%h2 Добро пожаловать в виртуальный торговый центр WebMall!
 		%div.col-md-4
 			%div.row
-				= form_tag session_path(:user) do
+				- if @user.nil?
+					= form_tag session_path(:user) do
+						%p
+							= text_field_tag 'user[email]'
+						%p					
+							= password_field_tag 'user[password]'
+						%p
+							= check_box_tag 'user[remember_me]'
+							= label_tag 'user[remember_me]', 'Remember me'
+						%p
+							= submit_tag 'Sign in'
 					%p
-						= text_field_tag 'user[email]'
-					%p					
-						= password_field_tag 'user[password]'
+						= link_to "Sign up", new_user_registration_path
 					%p
-						= check_box_tag 'user[remember_me]'
-						= label_tag 'user[remember_me]', 'Remember me'
-					%p
-						= submit_tag 'Sign in'
-				%p
-					= link_to "Sign up", new_user_registration_path
-				%p
-					= link_to "Forgot your password?", new_password_path(:user)
+						= link_to "Forgot your password?", new_password_path(:user)
