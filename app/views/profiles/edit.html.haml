@@ -2,7 +2,7 @@
   %div.row
     %div.col-md-8
       %b Please, modify your profile!
-      = simple_form_for :profile, url: profile_path, method: :put do |f|
+      = simple_form_for @resource, url: profile_path, method: :put do |f|
         %p
           = f.input :first_name, as: :string, label: 'First name'
         %p
