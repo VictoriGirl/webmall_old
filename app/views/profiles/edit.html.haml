@@ -1,7 +1,7 @@
 %div.container-fluid
   %div.row
     %div.col-md-8
-      %b Please, modify your profile!
+      %b Редактирование
       = simple_form_for @resource, url: profile_path, method: :put do |f|
         %p
           = f.input :first_name, as: :string, label: 'First name'
@@ -10,4 +10,4 @@
         %p
           = f.input :date_of_birth, as: :string, label: 'Date of birth'
         %p
-          = f.button :submit
+          = f.button :submit, 'Готово', class: "btn btn-primary"

@@ -1,4 +1,16 @@
-%p
-  = "Hello, #{@resource.first_name} #{@resource.last_name}"
-%p
-  = link_to "Edit", edit_profile_path
+%div.container-fluid
+  %div.row
+    %div.col-md-8
+      %p
+        = "Добро пожаловать, #{@resource.first_name} #{@resource.last_name}"
+      %p
+        %strong 
+          = "Имя: #{@resource.first_name}"
+      %p
+        %strong 
+          = "Фамилия: #{@resource.last_name}"
+      %p
+        %strong 
+          = "Фамилия: #{@resource.date_of_birth}"
+      %p
+        = link_to "Редактировать профиль", edit_profile_path, class: "btn btn-primary"
