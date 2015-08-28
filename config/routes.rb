@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :profiles, only: [:edit, :update, :show]
+  resources :stores, :goods
 
-  get '/mainpages/', to: 'mainpages#index'
+  get '/', to: 'mainpages#index'
 end

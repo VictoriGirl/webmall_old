@@ -11,6 +11,9 @@
           = "Фамилия: #{@resource.last_name}"
       %p
         %strong 
-          = "Фамилия: #{@resource.date_of_birth}"
+          = "Дата рождения: #{@resource.date_of_birth}"
+    %div.col-md-4
       %p
-        = link_to "Редактировать профиль", edit_profile_path, class: "btn btn-primary"
+        = link_to "Редактировать профиль", edit_profile_path, class: "btn btn-default btn-block"
+      %p
+        = link_to "Добавить интернет-магазин", new_store_path, class: "btn btn-default btn-block"

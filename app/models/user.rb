@@ -36,6 +36,7 @@ class User
   # field :locked_at,       type: Time
 
   embeds_one :profile
+  has_many :stores
 
   after_initialize :build_profile
 

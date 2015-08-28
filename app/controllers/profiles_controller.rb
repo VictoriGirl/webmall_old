@@ -11,7 +11,7 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    render :new if @resource.first_name.blank?
+    render :edit if @resource.first_name.blank?
   end
 
   private

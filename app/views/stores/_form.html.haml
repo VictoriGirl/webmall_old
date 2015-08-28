@@ -1,0 +1,11 @@
+= simple_form_for (@resource) do |f|
+  %p
+    = f.input :name, label: 'Название'
+  %p
+    = f.input :type, label: 'Специализация'
+  %p
+    = f.input :store_country, label: 'Страна'
+  %p
+    = f.input :store_city, label: 'Город'
+  %p
+    = f.button :submit, 'Создать магазин', class: "btn btn-primary"
