@@ -35,5 +35,13 @@ class User
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
 
-  has_one :profile
+  embeds_one :profile
+
+  after_initialize :build_profile
+
+  private
+
+  def build_profile
+    self.profile ||= Profile.new
+  end
 end

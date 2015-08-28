@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  root 'profiles#show'
+  root 'mainpages#index'
 
   devise_for :users
-  resource :profile
+  resources :profiles, only: [:edit, :update, :show]
+
+  get '/mainpages/', to: 'mainpages#index'
 end
