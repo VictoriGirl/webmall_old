@@ -8,6 +8,11 @@ class Store
   field :store_country, type: String
   field :store_city, type: String
 
-  belongs_to :users
-  has_many :goods
+  field :last_buying_at, type: DateTime
+  field :buying_count, type: Integer
+
+  validates :name, :type, :store_country, :store_city, presence: true
+
+  belongs_to :user
+  has_many :goods, dependent: :delete
 end

@@ -9,19 +9,22 @@ class StoresController < ApplicationController
 
   def create
     @resource = Store.create(set_params.merge(user: @user, date_of_opening: Time.zone.now))
-    @resource.present? ? redirect_to(@resource) : (render :new)
+    @resource.valid? ? redirect_to(@resource) : (render :new)
   end
 
   def edit
   end
 
   def update
+    @resource.update(set_params) ? (redirect_to @resource) : (render new_store_path)
   end
 
   def show
   end
 
   def destroy
+    @resource.delete
+    redirect_to profile_path(@user.profile)
   end
 
   private

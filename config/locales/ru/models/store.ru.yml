@@ -1,0 +1,14 @@
+ru:
+  mongoid:
+    errors:
+      models:
+        store:
+          attributes:
+            name:
+              blank: "Введите название"
+            type:
+              blank: "Введите специализацию"
+            store_country:
+              blank: "Выберите страну"
+            store_city:
+              blank: "Введите город"

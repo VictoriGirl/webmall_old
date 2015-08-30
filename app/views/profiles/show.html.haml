@@ -11,9 +11,16 @@
           = "Фамилия: #{@resource.last_name}"
       %p
         %strong 
-          = "Дата рождения: #{@resource.date_of_birth}"
+          = "Дата рождения: #{@resource.date_of_birth.strftime("%m.%d.%Y")}"
     %div.col-md-4
       %p
         = link_to "Редактировать профиль", edit_profile_path, class: "btn btn-default btn-block"
+      - if @user.stores.any?
+        %br
+        %p Ваши интернет-магазины
+        - @user.stores.each do |s|
+          %p
+            = link_to "#{s.name}", store_path(s), class: "btn btn-success btn-block"
+      %br
       %p
         = link_to "Добавить интернет-магазин", new_store_path, class: "btn btn-default btn-block"
