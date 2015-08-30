@@ -1,0 +1,15 @@
+= simple_form_for @resource, url: profile_path, method: :put do |f|
+  %p
+    = f.input :first_name, as: :string, label: 'First name'
+  %p
+    = f.input :last_name, as: :string, label: 'Last name'
+  - if @resource.date_of_birth.present?
+    %p
+      = f.input :date_of_birth, as: :string, input_html: { value: @resource.date_of_birth.strftime("%m.%d.%Y") },  label: 'Date of birth'
+  - else
+    %p
+      = f.input :date_of_birth, as: :string, label: 'Date of birth'
+  %p
+    - if @user.profile.first_name.present?
+      = link_to "Назад", profile_path(@user.profile), class: "btn btn-default"
+    = f.button :submit, 'Готово', class: "btn btn-primary"

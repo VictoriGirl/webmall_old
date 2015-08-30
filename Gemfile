@@ -27,6 +27,8 @@ gem 'rubocop', '~> 0.33.0', require: false
 gem 'devise', '~> 3.5.1'
 gem 'devise-bootstrap-views', '~> 0.0.5'
 
+gem 'mongoid-slug', '~> 4.0.0'
+
 group :development, :test do
   gem 'web-console', '~> 2.0'
   gem 'spring'
