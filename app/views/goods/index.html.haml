@@ -1,9 +1,12 @@
 %div.container-fluid
   %div.row
     %div.col-md-12
-      %p
-        = link_to "Добавить новый товар", new_store_good_path, :class => 'btn btn-default'
+      = link_to "Добавить новый товар", new_store_good_path, :class => 'btn btn-default pull-left'
+      = link_to "Вернуться в магазин", store_path(@store), :class => 'btn btn-default pull-right'
+      %br
+      %br
       - if @resource.any?
+        %br
         %table{:class => 'table table-striped table-bordered'}
           %thead
             %tr
