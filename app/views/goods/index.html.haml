@@ -1,0 +1,46 @@
+%div.container-fluid
+  %div.row
+    %div.col-md-12
+      %p
+        = link_to "Добавить новый товар", new_store_good_path, :class => 'btn btn-default'
+      - if @resource.any?
+        %table{:class => 'table table-striped table-bordered'}
+          %thead
+            %tr
+              %td
+                %b Название
+              %td
+                %b Категория товара
+              %td
+                %b Описание
+              %td
+                %b В наличии
+              %td
+                %b Количество
+              %td
+                %b Единица измерения
+              %td
+                %b В последний раз купили:
+              %td
+                %b Действия
+          %tbody
+            - @resource.each do |g|
+              %tr
+                %td #{g.name}
+                %td #{g.category}
+                %td #{g.description}
+                - if g.in_sight
+                  %td Да
+                - else
+                  %td Нет
+                %td #{g.count.to_i}
+                %td #{g.unit}
+                - if g.last_buying_date.present?
+                  %td #{g.last_buying_date.strftime("%m.%d.%Y")}
+                - else
+                  %td Этот товар еще никто не покупал, станьте первым!
+                  %td
+                    %p
+                      = link_to "Подробнее", store_good_path(@store, g), class: "btn btn-default"
+                    %p
+                      = link_to "Удалить", store_good_path(@store, g), class: "btn btn-default", method: :delete, class: "btn btn-danger btn-block", data: { confirm: 'Вы уверены?' }

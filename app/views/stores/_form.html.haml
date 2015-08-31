@@ -1,4 +1,8 @@
 = simple_form_for (@resource) do |f|
+  - if @resource.new_record?
+    %p
+      = f.input :title, as: :string, label: 'Уникальное значение для создания понятного человеку адреса магазина (например, webmall.ru/stores/example вместо webmall.ru/stores/9832471271)'
+  %br
   %p
     = f.input :name, label: 'Название'
   %p

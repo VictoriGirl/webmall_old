@@ -4,6 +4,8 @@ ru:
       models:
         store:
           attributes:
+            title:
+              taken: "Этот заголовок уже занят"
             name:
               blank: "Введите название"
             type:

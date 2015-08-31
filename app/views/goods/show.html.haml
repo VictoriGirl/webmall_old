@@ -1,0 +1,44 @@
+%div.container-fluid
+  %div.row
+    %div.col-md-8
+      %h4 Основная информация
+      %table.table
+        %tr
+          %td
+            %b
+              = @resource.name
+        %tr
+          %td
+            = "Категория: #{@resource.category}"
+        %tr
+          %td
+            = "Описание: #{@resource.description}"
+        %tr
+          %td
+            = 'В наличии:'
+            - if @resource.in_sight
+              = 'Да'
+            - else
+              = 'Нет'
+        %tr
+          %td
+            = "Количество, #{@resource.unit}: #{@resource.count}"
+        %tr
+          %td
+            - if @resource.last_buying_date.present?
+              = "В последний раз купили: #{@resource.description}"
+            - else
+              = 'Этот товар еще никто не покупал, станьте первым!'
+    %div.col-md-4
+      %div.row
+        %p
+          = link_to "К списку товаров", store_goods_path, class: "btn btn-default btn-block"
+        %p
+          = link_to "В магазин", store_path(@store), class: "btn btn-default btn-block"
+        %br
+        %p
+          = link_to "Изменить информацию о товаре", edit_store_good_path(@store, @resource), class: "btn btn-default btn-block"
+        %p
+          = link_to "Добавить товар на склад", "/stores/#{@store.id}/goods/#{@resource.id}/add", class: "btn btn-default btn-block"
+        %p
+          = link_to "Удалить", store_good_path(@store, @resource), class: "btn btn-default", method: :delete, class: "btn btn-danger btn-block", data: { confirm: 'Вы уверены?' }
