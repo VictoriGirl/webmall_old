@@ -5,7 +5,7 @@
     = f.input :last_name, as: :string, label: 'Last name'
   - if @resource.date_of_birth.present?
     %p
-      = f.input :date_of_birth, as: :string, input_html: { value: @resource.date_of_birth.strftime("%m.%d.%Y") },  label: 'Date of birth'
+      = f.input :date_of_birth, as: :string, input_html: { value: @resource.date_of_birth.strftime("%d.%m.%Y") },  label: 'Date of birth'
   - else
     %p
       = f.input :date_of_birth, as: :string, label: 'Date of birth'

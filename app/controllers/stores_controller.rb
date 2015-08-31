@@ -5,6 +5,7 @@ class StoresController < ApplicationController
 
   def new
     @resource = Store.new
+    # @countries_list = Country.all
   end
 
   def create

@@ -9,9 +9,14 @@
       %p
         %strong 
           = "Фамилия: #{@resource.last_name}"
-      %p
-        %strong 
-          = "Дата рождения: #{@resource.date_of_birth.strftime("%m.%d.%Y")}"
+      - if @resource.date_of_birth.present?
+        %p
+          %strong 
+            = "Дата рождения: #{@resource.date_of_birth.strftime("%m.%d.%Y")}"
+      -else
+        %p
+          %strong 
+            = "Дата рождения: Не указана"
     %div.col-md-4
       %p
         = link_to "Редактировать профиль", edit_profile_path, class: "btn btn-default btn-block"

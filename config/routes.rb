@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :cities
+  resources :countries
   root 'mainpages#index'
 
   devise_for :users
