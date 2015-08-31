@@ -16,6 +16,7 @@ gem 'bootstrap-will_paginate', '~> 0.0.10'
 gem 'haml', '~> 4.0.6'
 gem 'erb2haml', group: :development
 gem 'simple_form', '~> 3.1.0'
+gem 'country_select', '~> 2.3.0'
 
 gem 'jquery-rails'
 gem 'turbolinks'
@@ -25,6 +26,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rubocop', '~> 0.33.0', require: false
 gem 'devise', '~> 3.5.1'
 gem 'devise-bootstrap-views', '~> 0.0.5'
+
+gem 'mongoid-slug', '~> 4.0.0'
 
 group :development, :test do
   gem 'web-console', '~> 2.0'

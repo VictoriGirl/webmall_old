@@ -13,8 +13,10 @@
         padding-right: 60px;
         padding-top: 70px;
       }
-    = nav_bar :fixed => :top, :brand => 'Главная страница', :brand_link => mainpages_path do
+    = nav_bar :fixed => :top, :brand => 'Главная страница', :brand_link => root_path do
       = menu_group do
-        = menu_item 'Главная страница', mainpages_path
+        - if @user.present?
+          -if @user.profile.first_name.present?
+            = menu_item 'Офис', profile_path(@user.profile)
 
     = yield

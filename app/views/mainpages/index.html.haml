@@ -14,7 +14,7 @@
 							= check_box_tag 'user[remember_me]'
 							= label_tag 'user[remember_me]', 'Запомнить'
 						%p
-							= submit_tag 'Вход'
+							= submit_tag 'Вход', class: "btn btn-primary btn-xs"
 					%p
 						= link_to "Регистрация", new_user_registration_path
 					%p
@@ -23,8 +23,8 @@
 					%div.col-md-4
 						%div.row
 							%strong 
-								= link_to "Ваш офис", profile_path(@user)
+								= link_to "Ваш офис", profile_path(@user.profile), class: "btn btn-default btn-block"
 					%div.col-md-4
 						%div.row
 							%strong
-								= link_to "Выход", destroy_user_session_path, method: :delete
+								= link_to "Выход", destroy_user_session_path, method: :delete, class: "btn btn-default btn-block"

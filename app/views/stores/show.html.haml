@@ -1,0 +1,33 @@
+%div.container-fluid
+  %div.row
+    %div.col-md-8
+      %h4 Основная информация
+      %table.table
+        %tr
+          %td
+            %b
+              = @resource.name 
+        %tr
+          %td
+            = "Тип деятельности: #{@resource.type}"
+        %tr
+          %td 
+            = "Открыт: #{@resource.date_of_opening.strftime("%m.%d.%Y")}"
+        %tr
+          %td 
+            = "Местоположение: #{@resource.store_city}, #{@resource.store_country}"
+    %div.col-md-4
+      %div.row
+        %p
+          = link_to "Назад в офис", profile_path(@user.profile), class: "btn btn-default btn-block"
+        %br
+        %p
+          = link_to "Редактировать", edit_store_path(@resource), class: "btn btn-default btn-block"
+        %p
+          = link_to "Удалить", store_path(@resource), method: :delete, class: "btn btn-danger btn-block", data: { confirm: 'Вы уверены?' }
+        %br
+        %b Товары
+        %p
+          = link_to "Все товары", store_goods_path(@resource), class: "btn btn-success btn-block"
+        %p
+          = link_to "Добавить товар", new_store_good_path(@resource), class: "btn btn-success btn-block"
