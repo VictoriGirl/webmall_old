@@ -25,7 +25,7 @@
         %p Ваши интернет-магазины
         - @user.stores.each do |s|
           %p
-            = link_to "#{s.name}", store_path(s), class: "btn btn-success btn-block"
+            = link_to "#{s.name}", store_path(s.title), class: "btn btn-success btn-block"
       %br
       %p
         = link_to "Добавить интернет-магазин", new_store_path, class: "btn btn-default btn-block"

@@ -1,0 +1,12 @@
+ru:
+  mongoid:
+    errors:
+      models:
+        good:
+          attributes:
+            name:
+              blank: "Введите название товара"
+            category:
+              blank: "Выберите категорию товара"
+            unit:
+              blank: "Выберите единицу измерения"

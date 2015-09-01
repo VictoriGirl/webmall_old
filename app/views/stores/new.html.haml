@@ -2,4 +2,21 @@
   %div.row
     %div.col-md-8
       %h3 Создайте свой интернет-магазин
-      = render 'form'
+      = simple_form_for (@resource) do |f|
+        %p
+          = f.input :title, as: :string, label: 'Уникальный заголовок для создания красивого адреса магазина', placeholder: "example"
+        %h6 (например, webmall.ru/stores/example вместо webmall.ru/stores/9832471271)
+        %br
+        %p
+          = f.input :name, label: 'Название'
+        %p
+          = f.input :speciality, label: 'Специализация'
+        %p
+          = f.input :goods_type, label: 'Мы продаем', collection: ['Товары', 'Услуги'], :selected => 'Товары'
+        %p
+          = f.input :store_country, label: 'Страна'#, collection: @countries_list
+        %p
+          = f.input :store_city, label: 'Город'
+        %p
+          = link_to "Назад", profile_path(@user.profile), class: "btn btn-default"
+          = f.button :submit, 'Сохранить', class: "btn btn-primary"
