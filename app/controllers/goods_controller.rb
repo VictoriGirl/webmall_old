@@ -12,8 +12,8 @@ class GoodsController < ApplicationController
   end
 
   def create
-    @resource = Good.create(set_params.merge(store: @store, in_sight: true))
-    @resource.valid? ? redirect_to([@store, @resource]) : (render :new)
+    @resource = Good.new(set_params.merge(store: @store))
+    @resource.save ? (redirect_to action: 'show', store_title: @store.title, id: @resource.id) : (render :edit)
   end
 
   def edit
@@ -23,7 +23,7 @@ class GoodsController < ApplicationController
   end
 
   def update
-    @resource.update(set_params) ? (redirect_to [@store, @resource]) : (render new_store_good_path)
+    @resource.update(set_params) ? (redirect_to action: 'show', store_title: @store.title) : (render :new)
   end
 
   def show
@@ -41,7 +41,7 @@ class GoodsController < ApplicationController
   end
 
   def load_store
-    @store = Store.find(params[:store_id])
+    @store = Store.find_by(title: params[:store_title])
   end
 
   def load_resource

@@ -2,9 +2,9 @@
   %div.row
     %div.col-md-8
       %h3 Добавьте товар
-      = simple_form_for ([@store, @resource]) do |f|
+      = simple_form_for [@store, @resource], method: :put, url: store_good_path(@store.title, @resource) do |f|
         %p
           = f.input :count, as: :integer, label: "Количество, #{@resource.unit}", input_html: {value: 0 }
         %p    
-          = link_to "Назад", store_good_path(@store, @resource), class: "btn btn-default"
+          = link_to "Назад", store_good_path(@store.title, @resource), class: "btn btn-default"
           = f.button :submit, 'Готово', class: "btn btn-primary"

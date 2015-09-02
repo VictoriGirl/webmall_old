@@ -6,16 +6,18 @@
         .panel-heading
           %h4= t('.sign_up', :default => "Sign up")
         .panel-body
-          = form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { role: "form" }) do |f|
+          = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { role: "form" }) do |f|
             .form-group
-              = f.label :email
+              = f.label 'Email'
               = f.email_field :email, autofocus: true, class: "form-control"
             .form-group
-              = f.label :password
+              = f.label 'Пароль'
               %br/
               = f.password_field :password, class: "form-control"
             .form-group
-              = f.label :password_confirmation
+              = f.label 'Подтверждение пароля'
               = f.password_field :password_confirmation, class: "form-control"
+            .form-group
+              = f.input :role, label: 'Тип аккаунта', as: :select, collection: User::ROLES, selected: User::ROLES['Покупатель'], class: "form-control"
             = f.submit t('.sign_up', :default => "Sign up"), class: "btn btn-primary"
 = render "devise/shared/links"

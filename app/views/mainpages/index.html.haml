@@ -5,16 +5,17 @@
 		%div.col-md-4
 			%div.row
 				- if @user.nil?
-					= form_tag session_path(:user) do
-						%p
-							= text_field_tag 'user[email]'
-						%p					
-							= password_field_tag 'user[password]'
-						%p
-							= check_box_tag 'user[remember_me]'
-							= label_tag 'user[remember_me]', 'Запомнить'
-						%p
-							= submit_tag 'Вход', class: "btn btn-primary btn-xs"
+					= form_tag session_path(:user), class: 'form-inline' do
+						%div.form-group
+							%p
+								= text_field_tag 'user[email]'
+							%p					
+								= password_field_tag 'user[password]'
+							%p
+								= check_box_tag 'user[remember_me]'
+								= label_tag 'user[remember_me]', 'Запомнить'
+							%p
+								= submit_tag 'Вход', class: "btn btn-primary btn-xs"
 					%p
 						= link_to "Регистрация", new_user_registration_path
 					%p

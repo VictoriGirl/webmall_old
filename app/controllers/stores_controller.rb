@@ -9,15 +9,15 @@ class StoresController < ApplicationController
   end
 
   def create
-    @resource = Store.create(set_params.merge(user: @user, date_of_opening: Time.zone.now))
-    @resource.valid? ? redirect_to(@resource) : (render :new)
+    @resource = Store.new(set_params.merge(user: @user, date_of_opening: Time.zone.now))
+    @resource.save ? (redirect_to action: 'show', title: @resource.title) : (render :new)
   end
 
   def edit
   end
 
   def update
-    @resource.update(set_params) ? (redirect_to @resource) : (render new_store_path)
+    @resource.update(set_params) ? (redirect_to action: 'show', title: @resource.title) : (render :edit)
   end
 
   def show
@@ -35,10 +35,10 @@ class StoresController < ApplicationController
   end
 
   def load_resource
-    @resource = @user.stores.find(params[:id])
+    @resource = @user.stores.find_by(title: params[:title])
   end
 
   def set_params
-    params.require(:store).permit(:name, :type, :store_country, :store_city, :in_sight)
+    params.require(:store).permit(:name, :speciality, :goods_type, :store_country, :store_city, :in_sight, :title)
   end
 end
