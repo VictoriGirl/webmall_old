@@ -32,7 +32,7 @@
                 %td #{g.name}
                 %td #{g.category}
                 %td #{g.description}
-                - if g.in_sight
+                - if g.count > 0
                   %td Да
                 - else
                   %td Нет

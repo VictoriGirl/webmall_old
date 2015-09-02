@@ -16,7 +16,7 @@
         %tr
           %td
             = 'В наличии:'
-            - if @resource.in_sight
+            - if @resource.count > 0
               = 'Да'
             - else
               = 'Нет'

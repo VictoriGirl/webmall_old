@@ -16,7 +16,7 @@
     = nav_bar :fixed => :top, :brand => 'Главная страница', :brand_link => root_path do
       = menu_group do
         - if @user.present?
-          -if @user.profile.first_name.present?
+          -if @user.profile.attributes.count > 1
             = menu_item 'Офис', profile_path(@user.profile)
 
     = yield
