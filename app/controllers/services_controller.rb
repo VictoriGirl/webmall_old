@@ -1,18 +1,18 @@
-# GoodsController
-class GoodsController < ApplicationController
+# ServicesController
+class ServicesController < ApplicationController
   before_action :authenticate_user!, :load_user, :load_store
-  before_action :load_resource, only: [:show, :update, :edit, :destroy, :add]
+  before_action :load_resource, only: [:show, :update, :edit, :destroy]
 
   def index
-    @resource = @store.goods.all
+    @resource = @store.services.all
   end
 
   def new
-    @resource = Good.new
+    @resource = Service.new
   end
 
   def create
-    @resource = Good.new(set_params.merge(store: @store))
+    @resource = Service.new(set_params.merge(store: @store))
     @resource.save ? (redirect_to action: 'show', store_title: @store.title, id: @resource.id) : (render :edit)
   end
 
@@ -31,7 +31,7 @@ class GoodsController < ApplicationController
 
   def destroy
     @resource.delete
-    redirect_to store_goods_path
+    redirect_to store_services_path
   end
 
   private
@@ -45,12 +45,10 @@ class GoodsController < ApplicationController
   end
 
   def load_resource
-    @resource = Good.find(params[:id])
+    @resource = Service.find(params[:id])
   end
 
   def set_params
-    p = params.require(:good).permit(:name, :category, :description, :count, :unit, :price, :currency)
-    p[:count] = @resource.try(:count).to_i + p[:count].to_i
-    p
+    params.require(:service).permit(:name, :category, :description, :price, :currency, :in_sight)
   end
 end

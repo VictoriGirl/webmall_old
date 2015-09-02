@@ -29,8 +29,15 @@
         %p
           = link_to "Удалить", store_path(@resource.title), method: :delete, class: "btn btn-danger btn-block", data: { confirm: 'Вы уверены?' }
         %br
-        %b Товары
-        %p
-          = link_to "Все товары", store_goods_path(@resource.title), class: "btn btn-success btn-block"
-        %p
-          = link_to "Добавить товар", new_store_good_path(@resource.title), class: "btn btn-success btn-block"
+        - if @resource.goods_type == 'goods'
+          %b Товары
+          %p
+            = link_to "Все товары", store_goods_path(@resource.title), class: "btn btn-success btn-block"
+          %p
+            = link_to "Добавить товар", new_store_good_path(@resource.title), class: "btn btn-success btn-block"
+        - elsif @resource.goods_type == 'service'
+          %b Услуги
+          %p
+            = link_to "Все услуги", store_services_path(@resource.title), class: "btn btn-success btn-block"
+          %p
+            = link_to "Добавить услугу", new_store_service_path(@resource.title), class: "btn btn-success btn-block"

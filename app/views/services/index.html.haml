@@ -1,7 +1,7 @@
 %div.container-fluid
   %div.row
     %div.col-md-12
-      = link_to "Добавить новый товар", new_store_good_path, :class => 'btn btn-default pull-left'
+      = link_to "Добавить новую услугу", new_store_service_path, :class => 'btn btn-default pull-left'
       = link_to "Вернуться в магазин", store_path(@store.title), :class => 'btn btn-default pull-right'
       %br
       %br
@@ -13,15 +13,11 @@
               %td
                 %b Название
               %td
-                %b Категория товара
+                %b Категория услуги
               %td
                 %b Описание
               %td
                 %b В наличии
-              %td
-                %b Количество
-              %td
-                %b Единица измерения
               %td
                 %b Стоимость
               %td
@@ -36,20 +32,18 @@
                 %td #{g.name}
                 %td #{g.category}
                 %td #{g.description}
-                - if g.count > 0
+                - if g.in_sight
                   %td Да
                 - else
                   %td Нет
-                %td #{g.count.to_i}
-                %td #{Good::UNITS.key(g.unit)}
                 %td #{g.price}
-                %td #{Good::CURRENCIES.key(g.currency)}
+                %td #{Service::CURRENCIES.key(g.currency)}
                 - if g.last_buying_date.present?
                   %td #{g.last_buying_date.strftime("%m.%d.%Y")}
                 - else
-                  %td Этот товар еще никто не покупал
+                  %td Эту услугу еще никто не заказывал
                   %td
                     %p
-                      = link_to "Подробнее", store_good_path(@store.title, g), class: "btn btn-default btn-xs btn-block"
+                      = link_to "Подробнее", store_service_path(@store.title, g), class: "btn btn-default btn-xs btn-block"
                     %p
-                      = link_to "Удалить", store_good_path(@store.title, g), method: :delete, class: "btn btn-danger btn-block btn-xs", data: { confirm: 'Вы уверены?' }
+                      = link_to "Удалить", store_service_path(@store.title, g), method: :delete, class: "btn btn-danger btn-block btn-xs", data: { confirm: 'Вы уверены?' }

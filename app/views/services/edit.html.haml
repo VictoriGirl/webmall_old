@@ -2,22 +2,19 @@
   %div.row
     %div.col-md-8
       %h3 Измените информацию о товаре
-      = simple_form_for [@store, @resource], method: :put, url: store_good_path(@store.title, @resource) do |f|
+      = simple_form_for [@store, @resource], method: :put, url: store_service_path(@store.title, @resource) do |f|
         %p
           = f.input :name, as: :string, label: 'Название'
         %p
           = f.input :category, as: :string, label: 'Категория товара'
         %p
           = f.input :description, as: :string, label: 'Описание'
-        - if @resource.new_record?
-          %p
-            = f.input :count, as: :integer, label: 'Количество'
         %p
-          = f.input :unit, as: :select, collection: Good::UNITS
+          = f.input :in_sight, as: :boolean, label: 'В наличии'
         %p
           = f.input :price, as: :string, label: 'Стоимость'
         %p
-          = f.input :currency, as: :select, collection: Good::CURRENCIES
+          = f.input :currency, as: :select, collection: Service::CURRENCIES
         %p
-          = link_to "Назад", store_good_path(@store.title, @resource), class: "btn btn-default"
+          = link_to "Назад", store_service_path(@store.title, @resource), class: "btn btn-default"
           = f.button :submit, 'Готово', class: "btn btn-primary"

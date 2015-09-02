@@ -23,4 +23,5 @@ class Store
 
   belongs_to :user
   has_many :goods, dependent: :destroy
+  has_many :services, dependent: :destroy
 end

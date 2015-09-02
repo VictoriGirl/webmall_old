@@ -1,5 +1,5 @@
-# Good
-class Good
+# Service
+class Service
   UNITS = { 'Шт' => 'pc', 'Кг' => 'kg', 'Л' => 'l' }
   CURRENCIES = { 'Руб.' => 'RUB', '$' => 'USD', 'Евро' => 'EUR' }
 
@@ -9,14 +9,13 @@ class Good
   field :category, type: String
   field :description, type: String
 
-  field :count, type: Integer
-  field :unit, type: String
   field :price, type: Float
   field :currency, type: String
+  field :in_sight, type: Boolean
 
   field :last_buying_date, type: DateTime
 
-  validates :name, :category, :unit, presence: true
+  validates :name, :category, presence: true
   validates :currency, inclusion: { in: %w(RUB USD EUR) }
 
   belongs_to :store
