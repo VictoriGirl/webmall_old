@@ -13,7 +13,7 @@ class GoodsController < ApplicationController
 
   def create
     @resource = Good.new(set_params.merge(store: @store))
-    @resource.save ? (redirect_to action: 'show', store_title: @store.title, id: @resource.id) : (render :new)
+    @resource.save ? (redirect_to action: 'show', store_title: @store.title, id: @resource.id) : (render :edit)
   end
 
   def edit

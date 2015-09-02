@@ -17,7 +17,7 @@ class StoresController < ApplicationController
   end
 
   def update
-    @resource.update(set_params) ? (redirect_to action: 'show', title: @resource.title) : (render :new)
+    @resource.update(set_params) ? (redirect_to action: 'show', title: @resource.title) : (render :edit)
   end
 
   def show
