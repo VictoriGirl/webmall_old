@@ -12,7 +12,7 @@
             = "Специализация: #{@resource.speciality}"
         %tr
           %td
-            = "Продаем: #{@resource.goods_type}"
+            = "Продаем: #{Store::GOOD_TYPES.key(@resource.goods_type)}"
         %tr
           %td 
             = "Открыт: #{@resource.date_of_opening.strftime("%m.%d.%Y")}"

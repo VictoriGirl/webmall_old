@@ -1,0 +1,8 @@
+ru:
+  mongoid:
+    errors:
+      models:
+        profile:
+          attributes:
+            first_name:
+              blank: "Введите имя"
