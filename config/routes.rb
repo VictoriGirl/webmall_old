@@ -7,6 +7,11 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :profiles, only: [:edit, :update, :show]
+  resources :goods_choises do
+    get 'search', on: :collection
+  end
+  resources :services_choises
+  resources :calls
 
   scope module: 'sailer' do
     resources :stores, param: :title, except: [:index] do
@@ -15,11 +20,5 @@ Rails.application.routes.draw do
       end
       resources :services
     end
-  end
-
-  scope module: 'client' do
-    resources :calls
-    resources :goods_choises
-    resources :services_choises
   end
 end

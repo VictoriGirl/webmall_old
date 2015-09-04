@@ -10,7 +10,7 @@ class Call
 
   validates :status, inclusion: { in: %w(new executing done cancelled) }
 
-  has_one :goods
-  has_one :services
+  has_one :good
+  has_one :service
   has_one :user
 end

@@ -8,7 +8,7 @@
         %p
           = f.input :speciality, label: 'Специализация'
         %p
-          = f.input :goods_type, label: 'Мы продаем', collection: Store::GOOD_TYPES, selected: Store::GOOD_TYPES.key(@resource.goods_type)
+          = f.input :goods_type, label: 'Мы продаем', collection: Store::GOOD_TYPES
         %p
           = f.input :store_country, label: 'Страна'#, collection: @countries_list
         %p
