@@ -20,6 +20,7 @@ class Store
   validates :title, :name, :speciality, :goods_type, :store_country, :store_city, presence: true
   validates :goods_type, inclusion: { in: %w(goods service) }
   validates :title, uniqueness: true
+  validates :title, format: { with: /\A^[a-z0-9_-]{3,16}$*\z/ }
 
   belongs_to :user
   has_many :goods, dependent: :destroy

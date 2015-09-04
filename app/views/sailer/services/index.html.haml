@@ -27,23 +27,23 @@
               %td
                 %b Действия
           %tbody
-            - @resource.each do |g|
+            - @resource.each do |s|
               %tr
-                %td #{g.name}
-                %td #{g.category}
-                %td #{g.description}
-                - if g.in_sight
+                %td #{s.name}
+                %td #{s.category}
+                %td #{s.description}
+                - if s.in_sight
                   %td Да
                 - else
                   %td Нет
-                %td #{g.price}
-                %td #{Service::CURRENCIES.key(g.currency)}
-                - if g.last_buying_date.present?
-                  %td #{g.last_buying_date.strftime("%m.%d.%Y")}
+                %td #{s.price.round 2}
+                %td #{Service::CURRENCIES.key(s.currency)}
+                - if s.last_buying_date.present?
+                  %td #{s.last_buying_date.strftime("%m.%d.%Y")}
                 - else
                   %td Эту услугу еще никто не заказывал
                   %td
                     %p
-                      = link_to "Подробнее", store_service_path(@store.title, g), class: "btn btn-default btn-xs btn-block"
+                      = link_to "Подробнее", store_service_path(@store.title, s), class: "btn btn-default btn-xs btn-block"
                     %p
-                      = link_to "Удалить", store_service_path(@store.title, g), method: :delete, class: "btn btn-danger btn-block btn-xs", data: { confirm: 'Вы уверены?' }
+                      = link_to "Удалить", store_service_path(@store.title, s), method: :delete, class: "btn btn-danger btn-block btn-xs", data: { confirm: 'Вы уверены?' }

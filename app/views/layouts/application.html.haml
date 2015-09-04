@@ -10,15 +10,15 @@
     %nav.navbar.navbar-default{:fixed => :top, :role => :navigation}
       %div.navbar-header
         %a.navbar-brand{:href => root_path} ВебМолл
-      %ul.nav.navbar-nav.navbar-left
+      %ul.nav.navbar-nav.pull-left
         = menu_item 'Товары', goods_choises_path
         = menu_item 'Услуги', services_choises_path
-      %ul.nav.navbar-nav.navbar-rigth
+      %ul.nav.navbar-nav.pull-right
         - if user_signed_in?
           = menu_item 'Офис', profile_path(@user.profile)
           = menu_item 'Выход', destroy_user_session_path, method: :delete
         - else
           = menu_item 'Войти', new_user_session_path, method: :get
-          = menu_item 'Регистрация', new_user_registration_path, method: :get          
+          = menu_item 'Регистрация', new_user_registration_path, method: :get
     %div.maindiv
       = yield

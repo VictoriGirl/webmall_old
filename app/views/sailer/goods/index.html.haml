@@ -42,7 +42,7 @@
                   %td Нет
                 %td #{g.count.to_i}
                 %td #{Good::UNITS.key(g.unit)}
-                %td #{g.price}
+                %td #{g.price.round 2}
                 %td #{Good::CURRENCIES.key(g.currency)}
                 - if g.last_buying_date.present?
                   %td #{g.last_buying_date.strftime("%m.%d.%Y")}

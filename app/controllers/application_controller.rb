@@ -12,18 +12,18 @@ class ApplicationController < ActionController::Base
 
   def store_location
     return unless request.get?
-    if request.path != '/users/sign_in' &&
-       request.path != '/users/sign_up' &&
-       request.path != '/users/password/new' &&
-       request.path != '/users/password/edit' &&
-       request.path != '/users/confirmation' &&
-       request.path != '/users/sign_out' &&
-       !request.xhr? # don't store ajax calls
-      session[:previous_url] = request.fullpath
-    end
+    session[:previous_url] = request.fullpath if allowed?(request) && !request.xhr? # don't store ajax calls
   end
 
   def after_sign_in_path_for(_resource)
     session[:previous_url] || root_path
+  end
+
+  private
+
+  def allowed?(r)
+    r.path != '/users/sign_in' && r.path != '/users/sign_up' &&
+      r.path != '/users/password/new' && r.path != '/users/password/edit' &&
+      r.path != '/users/confirmation' && r.path != '/users/sign_out'
   end
 end

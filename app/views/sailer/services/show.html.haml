@@ -22,7 +22,7 @@
               = 'Нет'
         %tr
           %td
-            = "Стоимость, #{Service::CURRENCIES.key(@resource.currency)}: #{@resource.price}"
+            = "Стоимость, #{Service::CURRENCIES.key(@resource.currency)}: #{@resource.price.round 2}"
         %tr
           %td
             - if @resource.last_buying_date.present?

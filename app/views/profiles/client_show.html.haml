@@ -18,6 +18,10 @@
         %p
           %strong 
             = "Дата рождения: Не указана"
+      - if @resource.phone_number.present?
+        %p
+          %strong 
+            = "Номер телефона: #{@resource.phone_number}"
     %div.col-md-4
       %p
         = link_to "Редактировать профиль", edit_profile_path, class: "btn btn-default btn-block"
