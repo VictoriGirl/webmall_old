@@ -12,4 +12,5 @@ class Call
 
   has_one :goods
   has_one :services
+  has_one :user
 end

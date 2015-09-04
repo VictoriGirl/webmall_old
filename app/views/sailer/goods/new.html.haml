@@ -13,11 +13,11 @@
           %p
             = f.input :count, as: :integer, label: 'Количество'
         %p
-          = f.input :unit, as: :select, collection: Good::UNITS, selected: Good::UNITS['Шт']
+          = f.input :unit, as: :select, collection: Good::UNITS, selected: Good::UNITS['Шт'], label: 'Измеряется в:'
         %p
           = f.input :price, as: :string, label: 'Стоимость'
         %p
-          = f.input :currency, as: :select, collection: Good::CURRENCIES, selected: Good::CURRENCIES['Руб']
+          = f.input :currency, as: :select, collection: Good::CURRENCIES, selected: Good::CURRENCIES['Руб'], label: 'Валюта'
         %p
           = link_to "К списку товаров", store_goods_path, class: "btn btn-default"
           = f.button :submit, 'Готово', class: "btn btn-primary"

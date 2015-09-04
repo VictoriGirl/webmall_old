@@ -6,6 +6,7 @@ class Profile
   field :last_name, type: String
   field :date_of_birth, type: Date
   field :company, type: String
+  field :free, type: Boolean
 
   validates :first_name, presence: true, unless: :new_record?
 
