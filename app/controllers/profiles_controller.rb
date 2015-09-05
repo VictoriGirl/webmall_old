@@ -36,7 +36,7 @@ class ProfilesController < ApplicationController
   end
 
   def set_params
-    p = params.require(:profile).permit(:first_name, :last_name, :date_of_birth, :company, :phone_number)
+    p = params.require(:profile).permit(:first_name, :last_name, :date_of_birth, :company, :phone_number, :country, :city, :adress)
     p[:date_of_birth] = Time.zone.parse(p[:date_of_birth])
     p
   end

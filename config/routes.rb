@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     get 'search', on: :collection
   end
 
-  resources :stores_choises
+  resources :stores_choises, param: :title
   resources :calls
 
   scope module: 'sailer' do

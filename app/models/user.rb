@@ -43,7 +43,7 @@ class User
 
   embeds_one :profile
   has_many :stores
-  has_many :calls
+  has_many :baskets
 
   after_initialize :build_profile
 

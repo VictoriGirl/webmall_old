@@ -14,7 +14,7 @@ module Sailer
 
     def create
       @resource = Service.new(set_params.merge(store: @store))
-      @resource.save ? (redirect_to action: 'show', store_title: @store.title, id: @resource.id) : (render :edit)
+      @resource.save ? (redirect_to action: 'show', store_title: @store.title, id: @resource.id) : (render :new)
     end
 
     def edit
@@ -24,7 +24,7 @@ module Sailer
     end
 
     def update
-      @resource.update(set_params) ? (redirect_to action: 'show', store_title: @store.title) : (render :new)
+      @resource.update(set_params) ? (redirect_to action: 'show', store_title: @store.title) : (render :edit)
     end
 
     def show
@@ -36,6 +36,10 @@ module Sailer
     end
 
     private
+
+    def adapt_keywords(string)
+      string.split(',').map! {|k| k.strip } 
+    end
 
     def load_user
       @user = current_user
@@ -50,7 +54,9 @@ module Sailer
     end
 
     def set_params
-      params.require(:service).permit(:name, :category, :description, :price, :currency, :in_sight)
+      p = params.require(:service).permit(:name, :category, :description, :price, :currency, :in_sight, :keywords)
+      p[:keywords] = adapt_keywords(p[:keywords])
+      p
     end
   end
 end

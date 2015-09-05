@@ -12,6 +12,9 @@ class Profile
 
   # for client
   field :phone_number, type: String
+  field :country, type: String
+  field :city, type: String
+  field :adress, type: String
 
   validates :first_name, presence: true, unless: :new_record?
   validates :phone_number, length: { is: 11 }, allow_nil: true

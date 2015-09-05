@@ -1,6 +1,5 @@
 # Service
 class Service
-  UNITS = { 'Шт' => 'pc', 'Кг' => 'kg', 'Л' => 'l' }
   CURRENCIES = { 'Руб.' => 'RUB', '$' => 'USD', 'Евро' => 'EUR' }
 
   include Mongoid::Document
@@ -20,6 +19,8 @@ class Service
 
   validates :name, :category, presence: true
   validates :currency, inclusion: { in: %w(RUB USD EUR) }
+
+  validates_associated :store
 
   belongs_to :store
   has_many :calls

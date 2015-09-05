@@ -14,7 +14,7 @@
         %p
           = f.input :in_sight, as: :boolean, label: 'В наличии'
         %p
-          = f.input :price, as: :string, label: 'Стоимость'
+          = f.input :price, as: :float, label: 'Стоимость'
         %p
           = f.input :currency, as: :select, collection: Service::CURRENCIES
         %p

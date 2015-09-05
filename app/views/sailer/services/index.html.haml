@@ -36,7 +36,7 @@
                   %td Да
                 - else
                   %td Нет
-                %td #{s.price.round 2}
+                %td #{'%.2f' % s.price}
                 %td #{Service::CURRENCIES.key(s.currency)}
                 - if s.last_buying_date.present?
                   %td #{s.last_buying_date.strftime("%m.%d.%Y")}

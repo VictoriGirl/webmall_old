@@ -17,7 +17,7 @@
         %p
           = f.input :unit, as: :select, collection: Good::UNITS, selected: Good::UNITS['Шт'], label: 'Измеряется в:'
         %p
-          = f.input :price, as: :string, label: 'Стоимость'
+          = f.input :price, as: :float, label: 'Стоимость'
         %p
           = f.input :currency, as: :select, collection: Good::CURRENCIES, selected: Good::CURRENCIES['Руб'], label: 'Валюта'
         %p

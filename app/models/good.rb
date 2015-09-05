@@ -1,6 +1,6 @@
 # Good
 class Good
-  UNITS = { 'Шт' => 'pc', 'Кг' => 'kg', 'Л' => 'l' }
+  UNITS = { 'Шт' => 'pc', 'Кг' => 'kg', 'г' => 'g', 'Л' => 'l' }
   CURRENCIES = { 'Руб.' => 'RUB', '$' => 'USD', 'Евро' => 'EUR' }
 
   include Mongoid::Document
@@ -23,6 +23,8 @@ class Good
   validates :name, :category, :unit, presence: true
   validates :currency, inclusion: { in: %w(RUB USD EUR) }
 
+  validates_associated :store
+  
   belongs_to :store
   has_many :calls
 

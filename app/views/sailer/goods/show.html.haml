@@ -25,7 +25,7 @@
             = "Количество, #{Good::UNITS.key(@resource.unit)}: #{@resource.count}"
         %tr
           %td
-            = "Стоимость, #{Good::CURRENCIES.key(@resource.currency)}: #{@resource.price.round 2}"
+            = "Стоимость, #{Good::CURRENCIES.key(@resource.currency)}: #{'%.2f' % @resource.price}"
         %tr
           %td
             - if @resource.last_buying_date.present?

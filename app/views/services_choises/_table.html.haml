@@ -40,11 +40,11 @@
                 %td Да
               - else
                 %td Нет
-              %td #{s.price} #{Service::CURRENCIES.key(s.currency)}
+              %td #{'%.2f' % s.price} #{Service::CURRENCIES.key(s.currency)}
               %td
                 = link_to "#{s.store.name}", stores_choise_path(s.store)
               - if s.last_buying_date.present?
                 %td #{s.last_buying_date.strftime("%m.%d.%Y")}
               - else
-                %td Этот товар еще никто не покупал, станьте первым!
+                %td Эту услугу еще никто не заказывал, станьте первым!
                     

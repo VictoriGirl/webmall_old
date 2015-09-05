@@ -1,0 +1,41 @@
+%div.container-fluid
+  %div.row
+    %div.col-md-8
+      %h4 Основная информация
+      %table.table
+        %tr
+          %td
+            %b
+              = @resource.name
+        %tr
+          %td
+            = "Категория: #{@resource.category}"
+        %tr
+          %td
+            = "Описание: #{@resource.description}"
+        %tr
+          %td
+            = 'В наличии:'
+            - if @resource.in_sight
+              = 'Да'
+            - else
+              = 'Нет'
+        %tr
+          %td
+            = "Магазин: "
+            = link_to "#{@resource.store.name}", stores_choise_path(@resource.store.title)
+        %tr
+          %td
+            = "Стоимость, #{Good::CURRENCIES.key(@resource.currency)}: #{'%.2f' % @resource.price}"
+        %tr
+          %td
+            - if @resource.last_buying_date.present?
+              = "В последний раз купили: #{@resource.description}"
+            - else
+              = 'Эту услугу еще никто не заказывал, станьте первым!'
+    %div.col-md-4
+      %div.row
+        - if @user.present? && @user.role == 'sailer'
+        - else
+          %p
+            = link_to "Добавить в корзину", '#', class: "btn btn-primary btn-block"
