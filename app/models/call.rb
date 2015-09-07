@@ -11,7 +11,7 @@ class Call
   field :buying_price, type: Float
   field :buying_currency, type: String
   field :count, type: Integer
-  
+
   validates :status, inclusion: { in: %w(new executing done cancelled) }
   validates :buying_currency, inclusion: { in: %w(RUB USD EUR) }
 

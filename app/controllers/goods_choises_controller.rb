@@ -5,13 +5,14 @@ class GoodsChoisesController < ApplicationController
 
   def index
     @resource = Good.all
+    @resource = @resource.paginate(page: params[:page], per_page: 30)
   end
 
   def show
   end
 
   def search
-    @resource = Good.all.order_by(count_buying: 'desc').full_text_search(params[:search], allow_empty_search: true)
+    @resource = Good.full_text_search(params[:search], allow_empty_search: true)
   end
 
   private

@@ -16,6 +16,7 @@ class Service
   field :keywords, type: Array
 
   field :last_buying_date, type: DateTime
+  field :buying_count, type: Integer
 
   validates :name, :category, presence: true
   validates :currency, inclusion: { in: %w(RUB USD EUR) }
@@ -25,5 +26,5 @@ class Service
   belongs_to :store
   has_many :calls
 
-  search_in :name, :category, :description, :keywords, store: [:name, :speciality]
+  search_in :name, :category, :description, :keywords, store: [:name, :speciality, :goods_type]
 end

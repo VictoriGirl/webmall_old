@@ -11,7 +11,9 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'therubyracer'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails', '~> 3.2.0'
-gem 'bootstrap-will_paginate', '~> 0.0.10'
+gem 'will_paginate', '~> 3.0.7'
+gem 'will_paginate-bootstrap', '~> 1.0.1'
+gem 'will_paginate_mongoid', '~> 2.0.1'
 
 gem 'haml', '~> 4.0.6'
 gem 'erb2haml', group: :development

@@ -1,0 +1,35 @@
+%div.container-fluid
+  %div.row
+    %div.col-md-8
+      %h4 Основная информация
+      %table.table
+        %tr
+          %td
+            %b
+              = @resource.name 
+        %tr
+          %td
+            = "Специализация: #{@resource.speciality}"
+        %tr
+          %td
+            = "Продаем: #{Store::GOOD_TYPES.key(@resource.goods_type)}"
+        %tr
+          %td 
+            = "Открыт: #{@resource.date_of_opening.strftime("%m.%d.%Y")}"
+        %tr
+          %td
+            - if @resource.goods_type == 'goods'
+              = "Различных товаров в ассортименте: #{@resource.goods.count.to_i}"
+            - else
+              = "Различных услуг ассортименте #{@resource.services.count.to_i}"
+        %tr
+          %td
+            - if @resource.last_buying_date
+              = "Последняя покупка: #{@resource.last_buying_date.strftime("%m.%d.%Y")}"
+            - else
+              = "Последняя покупка: еще не совершалась, станьте первым!"
+        %tr
+          %td 
+            = "Местоположение: #{@resource.store_city}, #{@resource.store_country}"
+    %div.col-md-4
+      %div.row

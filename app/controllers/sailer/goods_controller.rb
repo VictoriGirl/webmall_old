@@ -6,6 +6,7 @@ module Sailer
 
     def index
       @resource = @store.goods.all
+      @resource = @resource.paginate(page: params[:page], per_page: 30)
     end
 
     def new
@@ -38,7 +39,7 @@ module Sailer
     private
 
     def adapt_keywords(string)
-      string.split(',').map! {|k| k.strip } 
+      string.split(',').map!(&:strip)
     end
 
     def load_user

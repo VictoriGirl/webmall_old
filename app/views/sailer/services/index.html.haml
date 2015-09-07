@@ -6,6 +6,7 @@
       %br
       %br
       - if @resource.any?
+      = will_paginate @resource, renderer: BootstrapPagination::Rails
         %br
         %table{:class => 'table table-striped table-bordered'}
           %thead
@@ -47,3 +48,4 @@
                       = link_to "Подробнее", store_service_path(@store.title, s), class: "btn btn-default btn-xs btn-block"
                     %p
                       = link_to "Удалить", store_service_path(@store.title, s), method: :delete, class: "btn btn-danger btn-block btn-xs", data: { confirm: 'Вы уверены?' }
+      = will_paginate @resource, renderer: BootstrapPagination::Rails

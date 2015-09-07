@@ -18,15 +18,15 @@ class Good
   field :keywords, type: Array
 
   field :last_buying_date, type: DateTime
-  field :count_buying, type: Integer
+  field :buying_count, type: Integer
 
   validates :name, :category, :unit, presence: true
   validates :currency, inclusion: { in: %w(RUB USD EUR) }
 
   validates_associated :store
-  
+
   belongs_to :store
   has_many :calls
 
-  search_in :name, :category, :description, :keywords, store: [:name, :speciality]
+  search_in :name, :category, :description, :keywords, store: [:name, :speciality, :goods_type]
 end

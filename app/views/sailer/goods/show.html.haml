@@ -29,9 +29,12 @@
         %tr
           %td
             - if @resource.last_buying_date.present?
-              = "В последний раз купили: #{@resource.description}"
+              = "В последний раз купили: #{@resource.last_buying_date}"
             - else
               = 'Этот товар еще никто не покупал'
+        %tr
+          %td
+            = "Всего покупок совершено: #{@resource.buying_count.to_i}"
     %div.col-md-4
       %div.row
         %p

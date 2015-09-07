@@ -13,6 +13,7 @@
       %ul.nav.navbar-nav.pull-left
         = menu_item 'Товары', goods_choises_path
         = menu_item 'Услуги', services_choises_path
+        = menu_item 'Магазины', stores_choises_path
       %ul.nav.navbar-nav.pull-right
         - if user_signed_in?
           = menu_item 'Офис', profile_path(@user.profile)

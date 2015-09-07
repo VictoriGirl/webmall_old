@@ -3,6 +3,7 @@ class Store
   GOOD_TYPES = { 'Товары' => 'goods', 'Услуги' => 'service' }
 
   include Mongoid::Document
+  include Mongoid::Search
 
   field :title, type: String
   index(title: 1)
@@ -14,7 +15,7 @@ class Store
   field :store_country, type: String
   field :store_city, type: String
 
-  field :last_buying_at, type: DateTime
+  field :last_buying_date, type: DateTime
   field :buying_count, type: Integer
 
   validates :title, :name, :speciality, :goods_type, :store_country, :store_city, presence: true
@@ -25,4 +26,6 @@ class Store
   belongs_to :user
   has_many :goods, dependent: :destroy
   has_many :services, dependent: :destroy
+
+  search_in :name, :speciality, :goods_type, goods: [:name, :category, :description, :keywords], services: [:name, :category, :description, :keywords]
 end

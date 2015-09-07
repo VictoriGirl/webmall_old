@@ -2,7 +2,7 @@
   %div.row
     = form_tag (search_services_choises_path), method: :get do
       %div.col-md-8
-        %h4 Весь ассортимент услуг в ВебМолле
+        %h4 Весь ассортимент магазинов в ВебМолле
       %div.col-md-4
         %div.input-group
           %input.form-control{placeholder: "Поиск", type: "text", name: 'search'}
@@ -19,34 +19,27 @@
             %td
               %b Название
             %td
-              %b Категория услуги
+              %b Специализация
             %td
-              %b Описание
+              %b Продает:
             %td
-              %b В наличии
+              %b Открыт:
             %td
-              %b Стоимость
+              %b Местоположение
             %td
-              %b Магазин
-            %td
-              %b В последний раз купили:
+              %b Дата последней покупки
         %tbody
           - @resource.each do |s|
             %tr
               %td
-                = link_to "#{s.name}", services_choise_path(s)
-              %td #{s.category}
-              %td #{s.description}
-              - if s.in_sight
-                %td Да
-              - else
-                %td Нет
-              %td #{'%.2f' % s.price} #{Service::CURRENCIES.key(s.currency)}
-              %td
-                = link_to "#{s.store.name}", stores_choise_path(s.store.title)
+                = link_to "#{s.name}", stores_choise_path(s.title)
+              %td #{s.speciality}
+              %td #{Store::GOOD_TYPES.key(s.goods_type)}
+              %td #{s.date_of_opening.strftime("%m.%d.%Y")}
+              %td #{s.store_city}, #{s.store_country}
               - if s.last_buying_date.present?
                 %td #{s.last_buying_date.strftime("%m.%d.%Y")}
               - else
-                %td Эту услугу еще никто не заказывал, станьте первым!
+                %td Здесь еще никто ничего не купил, станьте первым!
       = will_paginate @resource, renderer: BootstrapPagination::Rails
                     

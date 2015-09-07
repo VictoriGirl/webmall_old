@@ -1,10 +1,10 @@
-# ServicesChoisesController
-class ServicesChoisesController < ApplicationController
+# StoresChoisesController
+class StoresChoisesController < ApplicationController
   before_action :load_user
   before_action :load_resource, only: [:show]
 
   def index
-    @resource = Service.all
+    @resource = Store.all
     @resource = @resource.paginate(page: params[:page], per_page: 30)
   end
 
@@ -22,6 +22,6 @@ class ServicesChoisesController < ApplicationController
   end
 
   def load_resource
-    @resource = Service.find(params[:id])
+    @resource = Store.find_by(title: params[:title])
   end
 end
