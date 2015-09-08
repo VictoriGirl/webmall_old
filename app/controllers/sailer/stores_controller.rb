@@ -6,7 +6,6 @@ module Sailer
 
     def new
       @resource = Store.new
-      # @countries_list = Country.all
     end
 
     def create
@@ -40,7 +39,7 @@ module Sailer
     end
 
     def set_params
-      params.require(:store).permit(:name, :speciality, :goods_type, :store_country, :store_city, :in_sight, :title)
+      params.require(:store).permit(:name, :speciality, :ware_type, :store_country, :store_city, :title)
     end
   end
 end

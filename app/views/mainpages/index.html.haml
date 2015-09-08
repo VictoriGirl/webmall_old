@@ -4,6 +4,4 @@
       %h2 Добро пожаловать в виртуальный торговый центр WebMall!
     %div.col-md-3
       %div.row
-        - if @user.present? && @user.role == 'sailer'
-        -else
-          = link_to "Корзина", calls_path, class: "btn btn-default btn-block"
+        = render 'concerns/basket'

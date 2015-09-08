@@ -4,15 +4,17 @@ class ServicesChoisesController < ApplicationController
   before_action :load_resource, only: [:show]
 
   def index
-    @resource = Service.all
+    @resource = Ware.where(ware_type: 'service')
     @resource = @resource.paginate(page: params[:page], per_page: 30)
   end
 
   def show
+    @call = Call.where(ware: @resource, user: @user, status: 'new').first || Call.new
   end
 
   def search
-    @resource = Service.all.desc(:buying_count).full_text_search(params[:search], allow_empty_search: true)
+    @resource = Ware.where(ware_type: 'service').desc(:buying_count).full_text_search(params[:search], allow_empty_search: true)
+    @resource = @resource.paginate(page: params[:page], per_page: 30)
   end
 
   private
@@ -22,6 +24,6 @@ class ServicesChoisesController < ApplicationController
   end
 
   def load_resource
-    @resource = Service.find(params[:id])
+    @resource = Ware.find(params[:id])
   end
 end

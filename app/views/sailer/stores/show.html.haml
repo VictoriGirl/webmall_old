@@ -12,13 +12,13 @@
             = "Специализация: #{@resource.speciality}"
         %tr
           %td
-            = "Продаем: #{Store::GOOD_TYPES.key(@resource.goods_type)}"
+            = "Продаем: #{Store::WARE_TYPES.key(@resource.ware_type)}"
         %tr
           %td 
             = "Открыт: #{@resource.date_of_opening.strftime("%m.%d.%Y")}"
         %tr
           %td
-            - if @resource.goods_type == 'goods'
+            - if @resource.ware_type == 'goods'
               = "Различных товаров в ассортименте: #{@resource.goods.count.to_i}"
             - else
               = "Различных услуг ассортименте #{@resource.services.count.to_i}"
@@ -44,13 +44,13 @@
         %p
           = link_to "Удалить", store_path(@resource.title), method: :delete, class: "btn btn-danger btn-block", data: { confirm: 'Вы уверены?' }
         %br
-        - if @resource.goods_type == 'goods'
+        - if @resource.ware_type == 'goods'
           %b Товары
           %p
             = link_to "Все товары", store_goods_path(@resource.title), class: "btn btn-success btn-block"
           %p
             = link_to "Добавить товар", new_store_good_path(@resource.title), class: "btn btn-success btn-block"
-        - elsif @resource.goods_type == 'service'
+        - elsif @resource.ware_type == 'service'
           %b Услуги
           %p
             = link_to "Все услуги", store_services_path(@resource.title), class: "btn btn-success btn-block"

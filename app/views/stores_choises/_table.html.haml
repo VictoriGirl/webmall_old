@@ -1,6 +1,6 @@
 %div.container-fluid
   %div.row
-    = form_tag (search_services_choises_path), method: :get do
+    = form_tag (search_stores_choises_path), method: :get do
       %div.col-md-8
         %h4 Весь ассортимент магазинов в ВебМолле
       %div.col-md-4
@@ -34,7 +34,7 @@
               %td
                 = link_to "#{s.name}", stores_choise_path(s.title)
               %td #{s.speciality}
-              %td #{Store::GOOD_TYPES.key(s.goods_type)}
+              %td #{Store::WARE_TYPES.key(s.ware_type)}
               %td #{s.date_of_opening.strftime("%m.%d.%Y")}
               %td #{s.store_city}, #{s.store_country}
               - if s.last_buying_date.present?

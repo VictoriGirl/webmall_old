@@ -6,18 +6,22 @@ class Call
   include Mongoid::Document
 
   field :status, type: String
-  field :done_date, type: DateTime
+  field :call_date, type: DateTime
 
   field :buying_price, type: Float
   field :buying_currency, type: String
   field :count, type: Integer
 
+  field :name, type: String
+  field :email, type: String
+  field :phone_number, type: String
+  field :country, type: String
+  field :city, type: String
+  field :adress, type: String
+
   validates :status, inclusion: { in: %w(new executing done cancelled) }
   validates :buying_currency, inclusion: { in: %w(RUB USD EUR) }
 
-  validates_associated :basket
-
-  belongs_to :good
-  belongs_to :service
-  belongs_to :basket
+  belongs_to :ware
+  belongs_to :user # for client
 end

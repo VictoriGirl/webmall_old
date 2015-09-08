@@ -16,7 +16,7 @@
         %p
           = f.input :price, as: :float, label: 'Стоимость'
         %p
-          = f.input :currency, as: :select, collection: Service::CURRENCIES, selected: Service::CURRENCIES['Руб'], label: 'Валюта'
+          = f.input :currency, as: :select, collection: Ware::CURRENCIES, selected: Ware::CURRENCIES['Руб'], label: 'Валюта'
         %p
           = link_to "К списку товаров", store_services_path, class: "btn btn-default"
           = f.button :submit, 'Готово', class: "btn btn-primary"

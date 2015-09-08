@@ -5,16 +5,16 @@ module Sailer
     before_action :load_resource, only: [:show, :update, :edit, :destroy]
 
     def index
-      @resource = @store.services.all
+      @resource = @store.services
       @resource = @resource.paginate(page: params[:page], per_page: 30)
     end
 
     def new
-      @resource = Service.new
+      @resource = Ware.new
     end
 
     def create
-      @resource = Service.new(set_params.merge(store: @store))
+      @resource = Ware.new(set_params.merge(store: @store, ware_type: @store.ware_type))
       @resource.save ? (redirect_to action: 'show', store_title: @store.title, id: @resource.id) : (render :new)
     end
 
@@ -51,12 +51,12 @@ module Sailer
     end
 
     def load_resource
-      @resource = Service.find(params[:id])
+      @resource = Ware.find(params[:id])
     end
 
     def set_params
-      p = params.require(:service).permit(:name, :category, :description, :price, :currency, :in_sight, :keywords)
-      p[:keywords] = adapt_keywords(p[:keywords])
+      p = params.require(:ware).permit(:name, :category, :description, :price, :currency, :in_sight, :keywords)
+      p[:keywords] = adapt_keywords(p[:keywords]) if p[:keywords].present?
       p
     end
   end

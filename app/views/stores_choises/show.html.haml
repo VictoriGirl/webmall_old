@@ -12,13 +12,13 @@
             = "Специализация: #{@resource.speciality}"
         %tr
           %td
-            = "Продаем: #{Store::GOOD_TYPES.key(@resource.goods_type)}"
+            = "Продаем: #{Store::WARE_TYPES.key(@resource.ware_type)}"
         %tr
           %td 
             = "Открыт: #{@resource.date_of_opening.strftime("%m.%d.%Y")}"
         %tr
           %td
-            - if @resource.goods_type == 'goods'
+            - if @resource.ware_type == 'goods'
               = "Различных товаров в ассортименте: #{@resource.goods.count.to_i}"
             - else
               = "Различных услуг ассортименте #{@resource.services.count.to_i}"

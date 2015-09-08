@@ -12,7 +12,8 @@ class StoresChoisesController < ApplicationController
   end
 
   def search
-    @resource = Service.all.desc(:buying_count).full_text_search(params[:search], allow_empty_search: true)
+    @resource = Store.all.desc(:buying_count).full_text_search(params[:search], allow_empty_search: true)
+    @resource = @resource.paginate(page: params[:page], per_page: 30)
   end
 
   private

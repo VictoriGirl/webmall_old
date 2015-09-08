@@ -41,7 +41,7 @@
                 %td Да
               - else
                 %td Нет
-              %td #{'%.2f' % g.price} #{Good::CURRENCIES.key(g.currency)}
+              %td #{'%.2f' % g.price} #{Ware::CURRENCIES.key(g.currency)}
               %td
                 = link_to "#{g.store.name}", stores_choise_path(g.store.title)
               - if g.last_buying_date.present?

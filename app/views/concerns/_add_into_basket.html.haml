@@ -1,0 +1,12 @@
+- if @call.new_record?
+  = simple_form_for @call, method: :post do |f|
+    = f.input :count, as: :integer, label: 'Количество', input_html: { value: 1 }
+    = f.input :ware, as: :hidden, input_html: { value: @resource.id }
+    = f.button :submit, "Добавить в корзину", class: "btn btn-primary btn-block"
+-else
+  %b
+    = "Уже в корзине: #{@call.count}"
+  = simple_form_for @call, method: :put do |f|
+    = f.input :count, as: :integer, label: 'Добавьте еще', input_html: { value: 1 }
+    = f.input :ware, as: :hidden, input_html: { value: @resource.id }
+    = f.button :submit, "Добавить в корзину", class: "btn btn-primary btn-block"

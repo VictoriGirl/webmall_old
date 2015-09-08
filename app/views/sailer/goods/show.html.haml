@@ -22,10 +22,10 @@
               = 'Нет'
         %tr
           %td
-            = "Количество, #{Good::UNITS.key(@resource.unit)}: #{@resource.count}"
+            = "Количество, #{Ware::UNITS.key(@resource.unit)}: #{@resource.count}"
         %tr
           %td
-            = "Стоимость, #{Good::CURRENCIES.key(@resource.currency)}: #{'%.2f' % @resource.price}"
+            = "Стоимость, #{Ware::CURRENCIES.key(@resource.currency)}: #{'%.2f' % @resource.price}"
         %tr
           %td
             - if @resource.last_buying_date.present?

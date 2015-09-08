@@ -15,11 +15,11 @@
           %p
             = f.input :count, as: :integer, label: 'Количество'
         %p
-          = f.input :unit, as: :select, label: 'Измеряется в:', collection: Good::UNITS
+          = f.input :unit, as: :select, label: 'Измеряется в:', collection: Ware::UNITS
         %p
           = f.input :price, as: :float, label: 'Стоимость'
         %p
-          = f.input :currency, as: :select, collection: Good::CURRENCIES, label: 'Валюта'
+          = f.input :currency, as: :select, collection: Ware::CURRENCIES, label: 'Валюта'
         %p
           = link_to "Назад", store_good_path(@store.title, @resource), class: "btn btn-default"
           = f.button :submit, 'Готово', class: "btn btn-primary"

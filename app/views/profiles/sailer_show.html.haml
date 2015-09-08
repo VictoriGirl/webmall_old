@@ -21,6 +21,30 @@
               = "Дата рождения: Не указана"
         %tr
           %td
+            - if @resource.phone_number.present?
+              = "Номер телефона: #{@resource.phone_number}"
+            - else
+              = "Номер телефона: Не указан"
+        %tr
+          %td
+            - if @resource.country.present?
+              = "Страна: #{@resource.country}"
+            - else
+              = "Страна: Не указана"
+        %tr
+          %td
+            - if @resource.city.present?
+              = "Город: #{@resource.city}"
+            - else
+              = "Город: Не указан"
+        %tr
+          %td
+            - if @resource.adress.present?
+              = "Адрес: #{@resource.adress}"
+            - else
+              = "Адрес: Не указан"
+        %tr
+          %td
             - if @resource.company.present?
               = "Компания: #{@resource.company}"
             - else

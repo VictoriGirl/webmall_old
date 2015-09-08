@@ -8,14 +8,16 @@ Rails.application.routes.draw do
   devise_for :users
   resources :profiles, only: [:edit, :update, :show]
 
-  resources :goods_choises do
+  resources :goods_choises, only: [:index, :show] do
     get 'search', on: :collection
   end
-  resources :services_choises do
+  resources :services_choises, only: [:index, :show] do
+    get 'search', on: :collection
+  end
+  resources :stores_choises, param: :title, only: [:index, :show] do
     get 'search', on: :collection
   end
 
-  resources :stores_choises, param: :title
   resources :calls
 
   scope module: 'sailer' do

@@ -26,7 +26,7 @@
             = link_to "#{@resource.store.name}", stores_choise_path(@resource.store.title)
         %tr
           %td
-            = "Стоимость, #{Good::CURRENCIES.key(@resource.currency)}: #{'%.2f' % @resource.price}"
+            = "Стоимость, #{Ware::CURRENCIES.key(@resource.currency)}: #{'%.2f' % @resource.price}"
         %tr
           %td
             - if @resource.last_buying_date.present?
@@ -35,7 +35,4 @@
               = 'Эту услугу еще никто не заказывал, станьте первым!'
     %div.col-md-4
       %div.row
-        - if @user.present? && @user.role == 'sailer'
-        - else
-          %p
-            = link_to "Добавить в корзину", '#', class: "btn btn-primary btn-block"
+        = render 'concerns/add_into_basket'

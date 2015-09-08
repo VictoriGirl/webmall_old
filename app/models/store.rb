@@ -1,6 +1,6 @@
 # Store
 class Store
-  GOOD_TYPES = { 'Товары' => 'goods', 'Услуги' => 'service' }
+  WARE_TYPES = { 'Товары' => 'goods', 'Услуги' => 'service' }
 
   include Mongoid::Document
   include Mongoid::Search
@@ -10,7 +10,7 @@ class Store
 
   field :name, type: String
   field :speciality, type: String
-  field :goods_type, type: String
+  field :ware_type, type: String
   field :date_of_opening, type: Date
   field :store_country, type: String
   field :store_city, type: String
@@ -18,14 +18,22 @@ class Store
   field :last_buying_date, type: DateTime
   field :buying_count, type: Integer
 
-  validates :title, :name, :speciality, :goods_type, :store_country, :store_city, presence: true
-  validates :goods_type, inclusion: { in: %w(goods service) }
-  validates :title, uniqueness: true
-  validates :title, format: { with: /\A^[a-z0-9_-]{3,16}$*\z/ }
+  validates :title, :name, :speciality, :ware_type, :store_country, :store_city, presence: true
+  validates :ware_type, inclusion: { in: %w(goods service) }
+  validates :title, uniqueness: true, format: { with: /\A^[a-z0-9_-]{3,16}$*\z/ }
+
+  validates_associated :user
 
   belongs_to :user
-  has_many :goods, dependent: :destroy
-  has_many :services, dependent: :destroy
+  has_many :wares, dependent: :destroy
 
-  search_in :name, :speciality, :goods_type, goods: [:name, :category, :description, :keywords], services: [:name, :category, :description, :keywords]
+  search_in :name, :speciality, :ware_type, :title
+
+  def goods
+    wares.where(ware_type: 'goods')
+  end
+
+  def services
+    wares.where(ware_type: 'service')
+  end
 end

@@ -4,15 +4,17 @@ class GoodsChoisesController < ApplicationController
   before_action :load_resource, only: [:show]
 
   def index
-    @resource = Good.all
+    @resource = Ware.where(ware_type: 'goods')
     @resource = @resource.paginate(page: params[:page], per_page: 30)
   end
 
   def show
+    @call = Call.where(ware: @resource, user: @user, status: 'new').first || Call.new
   end
 
   def search
-    @resource = Good.full_text_search(params[:search], allow_empty_search: true)
+    @resource = Ware.where(ware_type: 'goods').desc(:buying_count).full_text_search(params[:search], allow_empty_search: true)
+    @resource = @resource.paginate(page: params[:page], per_page: 30)
   end
 
   private
@@ -22,6 +24,6 @@ class GoodsChoisesController < ApplicationController
   end
 
   def load_resource
-    @resource = Good.find(params[:id])
+    @resource = Ware.find(params[:id])
   end
 end
