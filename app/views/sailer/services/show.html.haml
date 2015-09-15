@@ -1,5 +1,9 @@
 %div.container-fluid
   %div.row
+    = link_to "В офис", profile_path(@user.profile), class: "btn btn-default btn-sm"
+    = link_to "В магазин", store_path(@store.title), class: "btn btn-default btn-sm"
+    = link_to "К списку услуг", store_services_path, class: "btn btn-default btn-sm"
+  %div.row
     %div.col-md-8
       %h4 Основная информация
       %table.table
@@ -15,16 +19,6 @@
             = "Описание: #{@resource.description}"
         %tr
           %td
-            = 'В наличии:'
-            - if @resource.in_sight
-              = 'Да'
-            - else
-              = 'Нет'
-        %tr
-          %td
-            = "Стоимость, #{Ware::CURRENCIES.key(@resource.currency)}: #{'%.2f' % @resource.price}"
-        %tr
-          %td
             - if @resource.last_buying_date.present?
               = "В последний раз купили: #{@resource.last_buying_date}"
             - else
@@ -34,11 +28,6 @@
             = "Всего покупок совершено: #{@resource.buying_count.to_i}"
     %div.col-md-4
       %div.row
-        %p
-          = link_to "К списку услуг", store_services_path, class: "btn btn-default btn-block"
-        %p
-          = link_to "В магазин", store_path(@store.title), class: "btn btn-default btn-block"
-        %br
         %p
           = link_to "Изменить информацию об услуге", edit_store_service_path(@store.title, @resource), class: "btn btn-default btn-block"
         %p

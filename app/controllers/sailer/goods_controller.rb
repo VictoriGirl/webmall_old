@@ -2,7 +2,7 @@ module Sailer
   # GoodsController
   class GoodsController < ApplicationController
     before_action :authenticate_user!, :load_user, :load_store
-    before_action :load_resource, only: [:show, :update, :edit, :destroy, :add]
+    before_action :load_resource, only: [:show, :update, :edit, :destroy]
 
     def index
       @resource = @store.goods
@@ -15,13 +15,15 @@ module Sailer
 
     def create
       @resource = Ware.new(set_params.merge(store: @store, ware_type: @store.ware_type))
-      @resource.save ? (redirect_to action: 'show', store_title: @store.title, id: @resource.id) : (render :new)
+      if @resource.save
+        create_storage
+        redirect_to action: 'show', store_title: @store.title, id: @resource.id
+      else
+        render :new
+      end
     end
 
     def edit
-    end
-
-    def add
     end
 
     def update
@@ -47,7 +49,7 @@ module Sailer
     end
 
     def load_store
-      @store = Store.find_by(title: params[:store_title])
+      @store = @user.stores.find_by(title: params[:store_title])
     end
 
     def load_resource
@@ -55,10 +57,14 @@ module Sailer
     end
 
     def set_params
-      p = params.require(:ware).permit(:name, :category, :description, :count, :unit, :price, :currency, :keywords)
-      p[:count] = @resource.try(:count).to_i + p[:count].to_i
+      p = params.require(:ware).permit(:name, :category, :description, :keywords)
       p[:keywords] = adapt_keywords(p[:keywords]) if p[:keywords].present?
       p
+    end
+
+    def create_storage
+      pops = @store.pops
+      pops.each { |p| WareStorage.create(pop: p, ware: @resource, in_sight: false, store: @store) } if pops.any?
     end
   end
 end

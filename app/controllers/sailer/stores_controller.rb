@@ -39,7 +39,7 @@ module Sailer
     end
 
     def set_params
-      params.require(:store).permit(:name, :speciality, :ware_type, :store_country, :store_city, :title)
+      params.require(:store).permit(:name, :speciality, :ware_type, :title)
     end
   end
 end

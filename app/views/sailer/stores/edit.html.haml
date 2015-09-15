@@ -10,9 +10,5 @@
         %p
           = f.input :ware_type, label: 'Мы продаем', collection: Store::WARE_TYPES
         %p
-          = f.input :store_country, label: 'Страна'#, collection: @countries_list
-        %p
-          = f.input :store_city, label: 'Город'
-        %p
           = link_to "Назад", profile_path(@user.profile), class: "btn btn-default"
           = f.button :submit, 'Сохранить', class: "btn btn-primary"

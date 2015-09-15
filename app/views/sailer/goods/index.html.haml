@@ -1,10 +1,11 @@
 %div.container-fluid
   %div.row
+    = link_to "В офис", profile_path(@user.profile), class: "btn btn-default btn-sm"
+    = link_to "В магазин", store_path(@store.title), class: "btn btn-default btn-sm"
+  %div.row
+    %p
+    = link_to "Добавить новый товар", new_store_good_path, :class => 'btn btn-primary pull-left'
     %div.col-md-12
-      = link_to "Добавить новый товар", new_store_good_path, :class => 'btn btn-default pull-left'
-      = link_to "Вернуться в магазин", store_path(@store.title), :class => 'btn btn-default pull-right'
-      %br
-      %br
       - if @resource.any?
       = will_paginate @resource, renderer: BootstrapPagination::Rails
         %br
@@ -18,16 +19,6 @@
               %td
                 %b Описание
               %td
-                %b В наличии
-              %td
-                %b Количество
-              %td
-                %b Единица измерения
-              %td
-                %b Стоимость
-              %td
-                %b Валюта
-              %td
                 %b В последний раз купили:
               %td
                 %b Действия
@@ -37,14 +28,6 @@
                 %td #{g.name}
                 %td #{g.category}
                 %td #{g.description}
-                - if g.count > 0
-                  %td Да
-                - else
-                  %td Нет
-                %td #{g.count.to_i}
-                %td #{Ware::UNITS.key(g.unit)}
-                %td #{'%.2f' % g.price}
-                %td #{Ware::CURRENCIES.key(g.currency)}
                 - if g.last_buying_date.present?
                   %td #{g.last_buying_date.strftime("%m.%d.%Y")}
                 - else

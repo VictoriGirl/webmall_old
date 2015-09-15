@@ -1,5 +1,9 @@
 %div.container-fluid
   %div.row
+    = link_to "В офис", profile_path(@user.profile), class: "btn btn-default btn-sm"
+    = link_to "В магазин", store_path(@store.title), class: "btn btn-default btn-sm"
+    = link_to "К списку товаров", store_goods_path, class: "btn btn-default btn-sm"
+  %div.row
     %div.col-md-8
       %h4 Основная информация
       %table.table
@@ -15,19 +19,6 @@
             = "Описание: #{@resource.description}"
         %tr
           %td
-            = 'В наличии:'
-            - if @resource.count > 0
-              = 'Да'
-            - else
-              = 'Нет'
-        %tr
-          %td
-            = "Количество, #{Ware::UNITS.key(@resource.unit)}: #{@resource.count}"
-        %tr
-          %td
-            = "Стоимость, #{Ware::CURRENCIES.key(@resource.currency)}: #{'%.2f' % @resource.price}"
-        %tr
-          %td
             - if @resource.last_buying_date.present?
               = "В последний раз купили: #{@resource.last_buying_date}"
             - else
@@ -38,13 +29,6 @@
     %div.col-md-4
       %div.row
         %p
-          = link_to "К списку товаров", store_goods_path, class: "btn btn-default btn-block"
-        %p
-          = link_to "В магазин", store_path(@store.title), class: "btn btn-default btn-block"
-        %br
-        %p
           = link_to "Изменить информацию о товаре", edit_store_good_path(@store.title, @resource), class: "btn btn-default btn-block"
-        %p
-          = link_to "Добавить товар на склад", add_store_good_path(@store.title, @resource), class: "btn btn-default btn-block"
         %p
           = link_to "Удалить", store_good_path(@store.title, @resource), class: "btn btn-default", method: :delete, class: "btn btn-danger btn-block", data: { confirm: 'Вы уверены?' }

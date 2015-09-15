@@ -1,8 +1,11 @@
 %div.container-fluid
   %div.row
+    = link_to "В офис", profile_path(@user.profile), class: "btn btn-default btn-sm"
+    = link_to "В магазин", store_path(@store.title), class: "btn btn-default btn-sm"
+  %div.row
+    %p
+    = link_to "Добавить новую услугу", new_store_service_path, :class => 'btn btn-primary pull-left'
     %div.col-md-12
-      = link_to "Добавить новую услугу", new_store_service_path, :class => 'btn btn-default pull-left'
-      = link_to "Вернуться в магазин", store_path(@store.title), :class => 'btn btn-default pull-right'
       %br
       %br
       - if @resource.any?
@@ -18,12 +21,6 @@
               %td
                 %b Описание
               %td
-                %b В наличии
-              %td
-                %b Стоимость
-              %td
-                %b Валюта
-              %td
                 %b В последний раз купили:
               %td
                 %b Действия
@@ -33,12 +30,6 @@
                 %td #{s.name}
                 %td #{s.category}
                 %td #{s.description}
-                - if s.in_sight
-                  %td Да
-                - else
-                  %td Нет
-                %td #{'%.2f' % s.price}
-                %td #{Ware::CURRENCIES.key(s.currency)}
                 - if s.last_buying_date.present?
                   %td #{s.last_buying_date.strftime("%m.%d.%Y")}
                 - else

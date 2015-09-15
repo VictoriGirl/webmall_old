@@ -36,7 +36,7 @@
               %td #{s.speciality}
               %td #{Store::WARE_TYPES.key(s.ware_type)}
               %td #{s.date_of_opening.strftime("%m.%d.%Y")}
-              %td #{s.store_city}, #{s.store_country}
+              %td #{s.store_city}, #{s.store_country}, #{s.adress}
               - if s.last_buying_date.present?
                 %td #{s.last_buying_date.strftime("%m.%d.%Y")}
               - else

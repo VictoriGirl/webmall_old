@@ -16,6 +16,7 @@
         = menu_item 'Магазины', stores_choises_path
       %ul.nav.navbar-nav.pull-right
         - if user_signed_in?
+          = menu_item 'Корзина', calls_path
           = menu_item 'Офис', profile_path(@user.profile)
           = menu_item 'Выход', destroy_user_session_path, method: :delete
         - else

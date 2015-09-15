@@ -1,0 +1,25 @@
+%div.container-fluid
+  %div.row
+    %div.col-md-8
+      %h3 Шаг 1. Добавьте торговую точку к вашему магазину
+      = simple_form_for [@store, @resource], method: :post, url: store_pops_path(store_title: @store.title) do |f|
+        %p
+          = f.input :name, as: :string, label: 'Название точки'
+        %p
+          = f.input :country, as: :string, label: 'Страна'
+        %p
+          = f.input :city, as: :string, label: 'Город'
+        %p
+          = f.input :adress, as: :string, label: 'Адрес', placeholder: "ул. Первая, дом 0, кв. 0"
+        %p
+          = f.input :working_from, as: :string, label: 'Время работы c', placeholder: "9:00"
+          = f.input :working_till, as: :string, label: 'по', placeholder: "20:00"
+        %p
+          = f.input :cash, as: :boolean, label: 'Оплата наличными'
+        %p
+          = f.input :card, as: :boolean, label: 'Оплата картой'
+        %p
+          = f.input :description, as: :string, label: 'Описание'
+        %p
+          = link_to "Назад", store_path(@store.title), class: "btn btn-default"
+          = f.button :submit, 'Сохранить', class: "btn btn-primary"

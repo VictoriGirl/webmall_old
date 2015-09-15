@@ -1,5 +1,7 @@
 %div.container-fluid
   %div.row
+    = link_to "В офис", profile_path(@user.profile), class: "btn btn-default btn-sm"
+  %div.row
     %div.col-md-8
       %h4 Основная информация
       %table.table
@@ -31,13 +33,21 @@
         %tr
           %td
             = "Всего покупок совершено: #{@resource.buying_count.to_i}"
-        %tr
-          %td 
-            = "Местоположение: #{@resource.store_city}, #{@resource.store_country}"
+      - if @resource.pops.any?
+        %b Точки продаж
+        - @resource.pops.each do |pop|
+          %div.panel.panel-default
+            %div.panel-body
+              %table.table
+                %tr
+                  %td 
+                  = link_to "#{pop.name}", store_pop_path(@resource.title, pop)
+                
+      - else
+        %b У вас еще нет ни одной точки продаж
+        = link_to 'Добавить', new_store_pop_path(@resource.title), class: "btn btn-default btn-sm"
     %div.col-md-4
       %div.row
-        %p
-          = link_to "Назад в офис", profile_path(@user.profile), class: "btn btn-default btn-block"
         %br
         %p
           = link_to "Редактировать", edit_store_path(@resource.title), class: "btn btn-default btn-block"

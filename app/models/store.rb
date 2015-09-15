@@ -12,13 +12,11 @@ class Store
   field :speciality, type: String
   field :ware_type, type: String
   field :date_of_opening, type: Date
-  field :store_country, type: String
-  field :store_city, type: String
 
   field :last_buying_date, type: DateTime
   field :buying_count, type: Integer
 
-  validates :title, :name, :speciality, :ware_type, :store_country, :store_city, presence: true
+  validates :title, :name, :speciality, :ware_type, presence: true
   validates :ware_type, inclusion: { in: %w(goods service) }
   validates :title, uniqueness: true, format: { with: /\A^[a-z0-9_-]{3,16}$*\z/ }
 
@@ -26,6 +24,8 @@ class Store
 
   belongs_to :user
   has_many :wares, dependent: :destroy
+  has_many :pops, dependent: :destroy
+  has_many :ware_storages, dependent: :destroy
 
   search_in :name, :speciality, :ware_type, :title
 

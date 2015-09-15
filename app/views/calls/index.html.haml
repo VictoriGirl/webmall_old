@@ -1,6 +1,7 @@
 %div.container-fluid
   %div.row
     %div.col-md-12
+      %h4 Ваша покупки
       - if @resource.any?
         = will_paginate @resource, renderer: BootstrapPagination::Rails
         %br
@@ -9,9 +10,21 @@
             %tr
               %td #{s.ware.name}
               %td #{s.ware.description}
-              %td #{s.ware.price} #{s.ware.currency}
+              %td #{s.ware.price} #{Ware::CURRENCIES.key(s.ware.currency)}
               %td #{s.ware.store.name}
               %td #{s.count} #{Ware::UNITS.key(s.ware.unit)}
+              %td Итого: #{s.ware.price * s.count} #{Ware::CURRENCIES.key(s.ware.currency)}
+              %td
+                = link_to '<i class="fa fa-plus fa-2x"></i>'.html_safe, call_path(s, {call:{count: 1}}), method: :put
+                - if s.count == 1
+                  = link_to '<i class="fa fa-minus fa-2x"></i>'.html_safe, call_path(s), method: :delete, data: { confirm: 'Вы уверены?' }
+                - else
+                  = link_to '<i class="fa fa-minus fa-2x"></i>'.html_safe, call_path(s, {call:{count: -1}}), method: :put
+        %b Всего:
+        - @full_price.each do |k, v|
+          %p #{v} #{Ware::CURRENCIES.key(k)}
+      - else
+        %b У вас еще нет покупок
             
 
                 

@@ -1,0 +1,70 @@
+%div.container-fluid
+  %div.row
+    = link_to "В офис", profile_path(@user.profile), class: "btn btn-default btn-sm"
+    = link_to "В магазин", store_path(@store.title), class: "btn btn-default btn-sm"
+    - if @pop.present?
+      = link_to "К торговой точке", store_pop_path(@store.title, @pop), class: "btn btn-default btn-sm"
+    -elsif @ware.present? && @ware.ware_type == 'goods'
+      = link_to "К описанию товара", store_good_path(@store.title, @ware), class: "btn btn-default btn-sm"
+    - elsif @ware.present? && @ware.ware_type == 'service'
+      = link_to "К описанию услуги", store_service_path(@store.title, @ware), class: "btn btn-default btn-sm"
+  %div.row
+    %div.col-md-12
+      %h4 Перечень товаров
+      - if @resource.any?
+        = will_paginate @resource, renderer: BootstrapPagination::Rails
+        %br
+        %table{:class => 'table table-striped table-bordered'}
+          %thead
+            %tr
+              %td
+                %b Название
+              %td
+                %b Цена
+              %td
+                %b Валюта
+              - if @store.ware_type == 'goods'
+                %td
+                  %b Количество
+                %td
+                  %b Единица измерения
+                %td
+                  %b В наличии
+              %td
+                %b Магазин
+              %td
+                %b Торговая точка
+              %td
+                %b Действия
+          %tbody
+            - @resource.each do |ws|
+              %tr
+                %td
+                  - if ws.ware.ware_type == 'goods'
+                    = link_to "#{ws.ware.name}", store_good_path(@store.title, ws.ware)
+                  - elsif ws.ware.ware_type == 'service'
+                    = link_to "#{ws.ware.name}", store_service_path(@store.title, ws.ware)
+                %td 
+                  = '%.2f' % "#{ws.price.to_f}"
+                %td #{ws.currency}
+                - if ws.ware.ware_type == 'goods'
+                  %td #{ws.count}
+                  %td #{ws.unit}
+                  - if ws.count.to_i > 0
+                    %td Да
+                  - else
+                    %td Нет
+                - else
+                  %td #{ws.in_sight}
+                %td
+                  = link_to "#{ws.store.name}", store_path(@store.title)
+                %td 
+                  = link_to "#{ws.pop.name}", store_pop_path(@store.title, ws.pop)
+                %td
+                  - if @pop.present?
+                    = link_to 'Изменить', edit_store_ware_storage_path(@store.title, ws, pop_id: @pop.id), class: "btn btn-default btn-xs"
+                  - elsif @ware.present?
+                    = link_to 'Изменить', edit_store_ware_storage_path(@store.title, ws, ware_id: @ware.id), class: "btn btn-default btn-xs"                    
+      - else
+        %b На складе еще нет товаров.
+        %p Чтобы добавить товар, вернитесь в свой магазин.

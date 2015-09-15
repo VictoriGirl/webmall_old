@@ -10,6 +10,11 @@
     %p
       = f.input :date_of_birth, as: :string, label: 'Дата рождения', placeholder: "19.01.1990"
   %p
+    = f.input :company, as: :string, label: 'Компания'
+  %br
+  %b Информация для покупок
+  %br
+  %p
     = f.input :phone_number, as: :string, label: 'Номер телефона', placeholder: "81234567890"
   %p
     = f.input :country, as: :string, label: 'Страна'
@@ -17,8 +22,6 @@
     = f.input :city, as: :string, label: 'Населенный пункт'
   %p
     = f.input :adress, as: :string, label: 'Адрес', placeholder: "ул. Первая, дом 0, кв. 0"
-  %p
-    = f.input :company, as: :string, label: 'Компания'
   %p
     - if @user.profile.first_name.present?
       = link_to "Назад", profile_path(@user.profile), class: "btn btn-default"

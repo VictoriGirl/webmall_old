@@ -22,10 +22,12 @@ Rails.application.routes.draw do
 
   scope module: 'sailer' do
     resources :stores, param: :title, except: [:index] do
-      resources :goods do
-        get 'add', on: :member
+      resources :pops, except: [:index] do
+        resources :deliveries, except: [:show]
       end
+      resources :goods
       resources :services
+      resources :ware_storages
     end
   end
 end
