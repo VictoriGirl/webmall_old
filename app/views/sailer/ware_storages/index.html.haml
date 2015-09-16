@@ -39,32 +39,38 @@
           %tbody
             - @resource.each do |ws|
               %tr
-                %td
-                  - if ws.ware.ware_type == 'goods'
-                    = link_to "#{ws.ware.name}", store_good_path(@store.title, ws.ware)
-                  - elsif ws.ware.ware_type == 'service'
-                    = link_to "#{ws.ware.name}", store_service_path(@store.title, ws.ware)
-                %td 
-                  = '%.2f' % "#{ws.price.to_f}"
-                %td #{ws.currency}
-                - if ws.ware.ware_type == 'goods'
-                  %td #{ws.count}
-                  %td #{ws.unit}
-                  - if ws.count.to_i > 0
-                    %td Да
-                  - else
-                    %td Нет
-                - else
-                  %td #{ws.in_sight}
-                %td
-                  = link_to "#{ws.store.name}", store_path(@store.title)
-                %td 
-                  = link_to "#{ws.pop.name}", store_pop_path(@store.title, ws.pop)
-                %td
+                = simple_form_for [@store, ws], method: :put, url: store_ware_storage_path(@store.title, ws) do |f|
                   - if @pop.present?
-                    = link_to 'Изменить', edit_store_ware_storage_path(@store.title, ws, pop_id: @pop.id), class: "btn btn-default btn-xs"
-                  - elsif @ware.present?
-                    = link_to 'Изменить', edit_store_ware_storage_path(@store.title, ws, ware_id: @ware.id), class: "btn btn-default btn-xs"                    
+                    = f.input :pop_id, as: :hidden, input_html: { value: "#{@pop.id.to_s}" }
+                  - if @ware.present?
+                    = f.input :ware_id, as: :hidden, input_html: { value: "#{@ware.id.to_s}" }
+                  %td
+                    - if ws.ware.ware_type == 'goods'
+                      = link_to "#{ws.ware.name}", store_good_path(@store.title, ws.ware)
+                    - elsif ws.ware.ware_type == 'service'
+                      = link_to "#{ws.ware.name}", store_service_path(@store.title, ws.ware)
+                  %td
+                    = f.input :price, as: :float, label: false
+                  %td
+                    = f.input :currency, as: :select, collection: WareStorage::CURRENCIES, label: false
+                  - if ws.ware.ware_type == 'goods'
+                    %td
+                      = f.input :count, as: :integer, label: false
+                    %td
+                      = f.input :unit, as: :select, collection: WareStorage::UNITS, label: false
+                    - if ws.count.to_i > 0
+                      %td Да
+                    - else
+                      %td Нет
+                  - else
+                    %td
+                      = f.input :in_sight, as: :boolean, label: false
+                  %td
+                    = link_to "#{ws.store.name}", store_path(@store.title)
+                  %td 
+                    = link_to "#{ws.pop.name}", store_pop_path(@store.title, ws.pop)
+                  %td
+                    = f.button :submit, 'Изменить', class: "btn btn-primary btn-xs"
       - else
         %b На складе еще нет товаров.
         %p Чтобы добавить товар, вернитесь в свой магазин.

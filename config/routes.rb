@@ -27,7 +27,7 @@ Rails.application.routes.draw do
       end
       resources :goods
       resources :services
-      resources :ware_storages
+      resources :ware_storages, only: [:index, :update]
     end
   end
 end
