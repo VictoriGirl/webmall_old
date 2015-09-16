@@ -43,7 +43,10 @@
             %div.panel-body
               %table.table
                 %tr
-                  %td #{Delivery::TYPES.key(d.type)}
+                  - if @store.ware_type == 'goods'
+                    %td #{Delivery::TYPES.key(d.type)}
+                  - else
+                    %td Выезд
                 %tr
                   %td #{d.description}
                 %tr

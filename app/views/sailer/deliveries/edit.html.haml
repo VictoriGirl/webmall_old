@@ -4,7 +4,10 @@
       %h3 Шаг 2. Добавьте способ доставки к вашей торговой точке
       = simple_form_for [@store, @pop, @resource], method: :put, url: store_pop_delivery_path(store_title: @store.title, pop_id: @pop.id.to_s) do |f|
         %p
-          = f.input :type, as: :select, label: 'Вид', collection: Delivery::TYPES
+          - if @store.ware_type == 'goods'
+            = f.input :type, as: :select, label: 'Вид', collection: Delivery::TYPES
+          - else
+            = f.input :type, as: :select, label: 'Вид', collection: {'Выезд' => 'courier'}
         %p
           = f.input :description, as: :string, label: 'Описание'
         %p

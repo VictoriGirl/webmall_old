@@ -35,6 +35,9 @@
             = "Всего покупок совершено: #{@resource.buying_count.to_i}"
       - if @resource.pops.any?
         %b Точки продаж
+        %p
+        = link_to 'Добавить', new_store_pop_path(@resource.title), class: "btn btn-default btn-xs"
+        %p
         - @resource.pops.each do |pop|
           %div.panel.panel-default
             %div.panel-body

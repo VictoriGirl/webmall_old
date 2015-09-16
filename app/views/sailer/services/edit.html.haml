@@ -1,12 +1,12 @@
 %div.container-fluid
   %div.row
     %div.col-md-8
-      %h3 Измените информацию о товаре
+      %h3 Измените информацию об услуге
       = simple_form_for [@store, @resource], method: :put, url: store_service_path(@store.title, @resource) do |f|
         %p
           = f.input :name, as: :string, label: 'Название'
         %p
-          = f.input :category, as: :string, label: 'Категория товара'
+          = f.input :category, as: :string, label: 'Категория услуги'
         %p
           = f.input :description, as: :string, label: 'Описание'
         %p
