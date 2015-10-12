@@ -10,67 +10,47 @@
       = link_to "К описанию услуги", store_service_path(@store.title, @ware), class: "btn btn-default btn-sm"
   %div.row
     %div.col-md-12
-      %h4 Перечень товаров
-      - if @resource.any?
-        = will_paginate @resource, renderer: BootstrapPagination::Rails
-        %br
-        %table{:class => 'table table-striped table-bordered'}
-          %thead
-            %tr
-              %td
-                %b Название
-              %td
-                %b Цена
-              %td
-                %b Валюта
-              - if @store.ware_type == 'goods'
-                %td
-                  %b Количество
-                %td
-                  %b Единица измерения
-              %td
-                %b В наличии
-              %td
-                %b Магазин
-              %td
-                %b Торговая точка
-              %td
-                %b Действия
-          %tbody
+      %div.row
+        %h4 Перечень товаров
+        - if @resource.any?
+          = will_paginate @resource, renderer: BootstrapPagination::Rails
+          %br
             - @resource.each do |ws|
-              %tr
+              %div.input-group.input-group-sm
                 = simple_form_for [@store, ws], method: :put, url: store_ware_storage_path(@store.title, ws) do |f|
                   - if @pop.present?
                     = f.input :pop_id, as: :hidden, input_html: { value: "#{@pop.id.to_s}" }
                   - if @ware.present?
                     = f.input :ware_id, as: :hidden, input_html: { value: "#{@ware.id.to_s}" }
-                  %td
+                  %div.col-xs-1
                     - if ws.ware.ware_type == 'goods'
-                      = link_to "#{ws.ware.name}", store_good_path(@store.title, ws.ware)
+                      %b
+                        = link_to "#{ws.ware.name}", store_good_path(@store.title, ws.ware)
                     - elsif ws.ware.ware_type == 'service'
-                      = link_to "#{ws.ware.name}", store_service_path(@store.title, ws.ware)
-                  %td
-                    = f.input :price, as: :float, label: false
-                  %td
-                    = f.input :currency, as: :select, collection: WareStorage::CURRENCIES, label: false
+                      %b
+                        = link_to "#{ws.ware.name}", store_service_path(@store.title, ws.ware)
+                  %div.col-xs-3
+                    = f.input :price, as: :float, label: "Цена, #{Ware::CURRENCIES.key(ws.ware.currency)}"
+                    %b
                   - if ws.ware.ware_type == 'goods'
-                    %td
-                      = f.input :count, as: :integer, label: false
-                    %td
-                      = f.input :unit, as: :select, collection: WareStorage::UNITS, label: false
-                    - if ws.count.to_i > 0
-                      %td Да
-                    - else
-                      %td Нет
+                    %div.col-xs-3
+                      = f.input :count, as: :integer, label: "Количество, #{Ware::UNITS.key(ws.ware.unit)}"
+                      %b
+                    %div.col-xs-2
+                      - if ws.count.to_i > 0
+                        = 'В наличии'
+                      - else
+                        = 'Нет в наличии'
                   - else
-                    %td
-                      = f.input :in_sight, as: :boolean, label: false
-                  %td
+                    %div.col-xs-2
+                      = f.input :in_sight, as: :boolean, label: 'В наличии'
+                  %div.col-xs-2
                     = link_to "#{ws.store.name}", store_path(@store.title)
-                  %td 
+                    %br
                     = link_to "#{ws.pop.name}", store_pop_path(@store.title, ws.pop)
-                  %td
+                  %div.col-xs-1
                     = f.button :submit, 'Изменить', class: "btn btn-primary btn-xs"
-      - else
-        %b На складе еще нет товаров.
-        %p Чтобы добавить товар, вернитесь в свой магазин.
+              %br
+        - else
+          %b На складе еще нет товаров.
+          %p Чтобы добавить товар, вернитесь в свой магазин.

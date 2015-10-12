@@ -1,10 +1,12 @@
 # ServicesChoisesController
+require 'will_paginate/array'
+
 class ServicesChoisesController < ApplicationController
   before_action :load_user
   before_action :load_resource, only: [:show]
 
   def index
-    @resource = Ware.where(ware_type: 'service')
+    @resource = Ware.where(ware_type: 'service').select {|w| w.ware_storages.where(in_sight: true).length > 0 }
     @resource = @resource.paginate(page: params[:page], per_page: 30)
   end
 

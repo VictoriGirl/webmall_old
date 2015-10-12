@@ -10,6 +10,10 @@
         %p
           = f.input :description, as: :string, label: 'Описание'
         %p
+          = f.input :currency, as: :select, collection: Ware::CURRENCIES, selected: Ware::CURRENCIES.key('Руб'), label: 'Валюта'
+        %p
+          = f.input :unit, as: :select, collection: Ware::UNITS, selected: Ware::UNITS.key('Шт'), label: 'Измеряется в'
+        %p
           = f.input :keywords, as: :string, label: 'Ключевые слова', placeholder: "example1, example2, example3"
         %p
           = link_to "К списку товаров", store_goods_path, class: "btn btn-default"

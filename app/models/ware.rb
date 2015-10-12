@@ -1,5 +1,8 @@
 # Ware
 class Ware
+  UNITS = { 'Шт' => 'pc', 'Кг' => 'kg', 'г' => 'g', 'Л' => 'l' }
+  CURRENCIES = { 'Руб' => 'RUB', '$' => 'USD', 'Евро' => 'EUR' }
+
   include Mongoid::Document
   include Mongoid::Search
 
@@ -8,12 +11,18 @@ class Ware
   field :description, type: String
   field :ware_type, type: String
 
+  field :currency, type: String
+  field :unit, type: String
+
   field :keywords, type: Array
 
   field :last_buying_date, type: DateTime
   field :buying_count, type: Integer
 
   validates :name, :category, presence: true
+  validates :currency, inclusion: { in: %w(RUB USD EUR) }, allow_blank: false
+  validates :unit, inclusion: { in: %w(pc kg g l) }, allow_blank: false, if: :goods?
+  validates :unit, inclusion: { in: %w(pc kg g l) }, allow_blank: true
 
   validates_associated :store
 

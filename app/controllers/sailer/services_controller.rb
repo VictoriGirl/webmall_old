@@ -57,7 +57,7 @@ module Sailer
     end
 
     def set_params
-      p = params.require(:ware).permit(:name, :category, :description, :keywords)
+      p = params.require(:ware).permit(:name, :category, :description, :keywords, :currency, :unit)
       p[:keywords] = adapt_keywords(p[:keywords]) if p[:keywords].present?
       p
     end

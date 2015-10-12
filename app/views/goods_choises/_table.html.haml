@@ -37,11 +37,14 @@
                 = link_to "#{g.name}", goods_choise_path(g)
               %td #{g.category}
               %td #{g.description}
-              - if g.count > 0
+              - if g.ware_storages.gte(count: 0).exists?
                 %td Да
               - else
                 %td Нет
-              %td #{'%.2f' % g.price} #{Ware::CURRENCIES.key(g.currency)}
+              - if g.ware_storages.min(:price).present?
+                %td #{g.ware_storages.min(:price)} #{Ware::CURRENCIES.key(g.currency)}
+              - else
+                %td Нет в наличии
               %td
                 = link_to "#{g.store.name}", stores_choise_path(g.store.title)
               - if g.last_buying_date.present?

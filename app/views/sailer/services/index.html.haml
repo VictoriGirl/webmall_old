@@ -21,6 +21,8 @@
                 %td
                   %b Описание
                 %td
+                  %b Стоимость в:
+                %td
                   %b В последний раз купили:
                 %td
                   %b Действия
@@ -30,6 +32,7 @@
                   %td #{s.name}
                   %td #{s.category}
                   %td #{s.description}
+                  %td #{Ware::CURRENCIES.key(s.currency)}
                   - if s.last_buying_date.present?
                     %td #{s.last_buying_date.strftime("%m.%d.%Y")}
                   - else

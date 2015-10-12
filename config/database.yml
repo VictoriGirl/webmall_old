@@ -1,0 +1,17 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: pg_webmall_development
+  pool: 5
+  timeout: 5000
+  username: victorigirl
+  password: 01
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: pg_webmall_test
+  pool: 5
+  timeout: 5000
+  username: victorigirl
+  password: 01

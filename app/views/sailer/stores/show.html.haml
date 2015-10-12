@@ -38,14 +38,13 @@
         %p
         = link_to 'Добавить', new_store_pop_path(@resource.title), class: "btn btn-default btn-xs"
         %p
-        - @resource.pops.each do |pop|
-          %div.panel.panel-default
-            %div.panel-body
-              %table.table
+        %div.panel.panel-default
+          %div.panel-body
+            %table.table
+              - @resource.pops.each do |pop|
                 %tr
                   %td 
-                  = link_to "#{pop.name}", store_pop_path(@resource.title, pop)
-                
+                    = link_to "#{pop.name}", store_pop_path(@resource.title, pop)
       - else
         %b У вас еще нет ни одной точки продаж
         = link_to 'Добавить', new_store_pop_path(@resource.title), class: "btn btn-default btn-sm"

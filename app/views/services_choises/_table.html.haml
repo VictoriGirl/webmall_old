@@ -37,11 +37,14 @@
                 = link_to "#{s.name}", services_choise_path(s)
               %td #{s.category}
               %td #{s.description}
-              - if s.in_sight
+              - if s.ware_storages.where(in_sight: true).exists?
                 %td Да
               - else
                 %td Нет
-              %td #{'%.2f' % s.price} #{Ware::CURRENCIES.key(s.currency)}
+              - if s.ware_storages.min(:price).present?
+                %td #{'%.2f' % s.ware_storages.min(:price)} #{Ware::CURRENCIES.key(s.currency)}
+              - else
+                %td Нет в наличии
               %td
                 = link_to "#{s.store.name}", stores_choise_path(s.store.title)
               - if s.last_buying_date.present?

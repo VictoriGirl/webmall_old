@@ -19,6 +19,9 @@
             = "Описание: #{@resource.description}"
         %tr
           %td
+            = "Стоимость в: #{Ware::CURRENCIES.key(@resource.currency)}"
+        %tr
+          %td
             - if @resource.last_buying_date.present?
               = "В последний раз купили: #{@resource.last_buying_date}"
             - else

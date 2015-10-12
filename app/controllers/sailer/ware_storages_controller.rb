@@ -7,10 +7,10 @@ module Sailer
     def index
       if params[:pop_id].present?
         @pop = @store.pops.find(params[:pop_id])
-        @resource = WareStorage.where(pop: @pop)
+        @resource = WareStorage.where(pop: @pop).desc(:created_at)
       elsif params[:ware_id].present?
         @ware = @store.wares.find(params[:ware_id])
-        @resource = WareStorage.where(ware: @ware)
+        @resource = WareStorage.where(ware: @ware).desc(:created_at)
       end
       @resource = @resource.paginate(page: params[:page], per_page: 30)
     end
@@ -35,7 +35,7 @@ module Sailer
     end
 
     def set_params
-      params.require(:ware_storage).permit(:price, :currency, :count, :unit, :in_sight)
+      params.require(:ware_storage).permit(:price, :count, :in_sight)
     end
 
     def set_redirect

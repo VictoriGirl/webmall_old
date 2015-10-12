@@ -1,10 +1,12 @@
 # GoodsChoisesController
+require 'will_paginate/array'
+
 class GoodsChoisesController < ApplicationController
   before_action :load_user
   before_action :load_resource, only: [:show]
 
   def index
-    @resource = Ware.where(ware_type: 'goods')
+    @resource = Ware.where(ware_type: 'goods').select {|w| w.ware_storages.gte(count: 0).length > 0 }
     @resource = @resource.paginate(page: params[:page], per_page: 30)
   end
 
