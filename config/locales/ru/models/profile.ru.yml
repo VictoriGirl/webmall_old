@@ -1,0 +1,10 @@
+ru:
+  mongoid:
+    errors:
+      models:
+        profile:
+          attributes:
+            first_name:
+              blank: "Введите имя"
+            phone_number:
+              wrong_length: "Номер телефона должен состоять из 11 цифр"

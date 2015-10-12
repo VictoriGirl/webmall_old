@@ -1,0 +1,18 @@
+%div.container-fluid
+  %div.row
+    %div.col-md-8
+      %h3 Добавьте услугу
+      = simple_form_for [@store, @resource], method: :post, url: store_services_path(store_title: @store.title) do |f|
+        %p
+          = f.input :name, as: :string, label: 'Название'
+        %p
+          = f.input :category, as: :string, label: 'Категория услуги'
+        %p
+          = f.input :description, as: :string, label: 'Описание'
+        %p
+          = f.input :currency, as: :select, collection: Ware::CURRENCIES, selected: Ware::CURRENCIES.key('Руб'), label: 'Валюта'
+        %p
+          = f.input :keywords, as: :string, label: 'Ключевые слова', placeholder: "example1, example2, example3"
+        %p
+          = link_to "К списку услуг", store_services_path, class: "btn btn-default"
+          = f.button :submit, 'Готово', class: "btn btn-primary"

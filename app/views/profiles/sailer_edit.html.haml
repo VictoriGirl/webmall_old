@@ -1,0 +1,8 @@
+%div.container-fluid
+  %div.row
+    %div.col-md-8
+      - if @resource.date_of_birth.present?
+        %b Измените свой профиль
+      - else
+        %b Заполните свой профиль
+      = render 'sailer_form'

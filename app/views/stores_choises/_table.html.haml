@@ -1,0 +1,45 @@
+%div.container-fluid
+  %div.row
+    = form_tag (search_stores_choises_path), method: :get do
+      %div.col-md-8
+        %h4 Весь ассортимент магазинов в ВебМолле
+      %div.col-md-4
+        %div.input-group
+          %input.form-control{placeholder: "Поиск", type: "text", name: 'search'}
+          %span.input-group-btn
+            %button.btn.btn-primary{type: "submit"} Поехали!
+  %div.row
+    %div.col-md-12
+    - if @resource.any?
+      = will_paginate @resource, renderer: BootstrapPagination::Rails
+      %br
+      %table{:class => 'table table-striped table-bordered'}
+        %thead
+          %tr
+            %td
+              %b Название
+            %td
+              %b Специализация
+            %td
+              %b Продает:
+            %td
+              %b Открыт:
+            %td
+              %b Местоположение
+            %td
+              %b Дата последней покупки
+        %tbody
+          - @resource.each do |s|
+            %tr
+              %td
+                = link_to "#{s.name}", stores_choise_path(s.title)
+              %td #{s.speciality}
+              %td #{Store::WARE_TYPES.key(s.ware_type)}
+              %td #{s.date_of_opening.strftime("%m.%d.%Y")}
+              %td #{s.store_city}, #{s.store_country}, #{s.adress}
+              - if s.last_buying_date.present?
+                %td #{s.last_buying_date.strftime("%m.%d.%Y")}
+              - else
+                %td Здесь еще никто ничего не купил, станьте первым!
+      = will_paginate @resource, renderer: BootstrapPagination::Rails
+                    

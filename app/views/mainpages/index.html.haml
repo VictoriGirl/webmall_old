@@ -1,31 +1,6 @@
 %div.container-fluid
-	%div.row
-		%div.col-md-8
-			%h2 Добро пожаловать в виртуальный торговый центр WebMall!
-		%div.col-md-4
-			%div.row
-				- if @user.nil?
-					= form_tag session_path(:user), class: 'form-inline' do
-						%div.form-group
-							%p
-								= text_field_tag 'user[email]'
-							%p					
-								= password_field_tag 'user[password]'
-							%p
-								= check_box_tag 'user[remember_me]'
-								= label_tag 'user[remember_me]', 'Запомнить'
-							%p
-								= submit_tag 'Вход', class: "btn btn-primary btn-xs"
-					%p
-						= link_to "Регистрация", new_user_registration_path
-					%p
-						= link_to "Забыли пароль?", new_password_path(:user)
-				- else
-					%div.col-md-4
-						%div.row
-							%strong 
-								= link_to "Ваш офис", profile_path(@user.profile), class: "btn btn-default btn-block"
-					%div.col-md-4
-						%div.row
-							%strong
-								= link_to "Выход", destroy_user_session_path, method: :delete, class: "btn btn-default btn-block"
+  %div.row
+    %div.col-md-9
+      %h2 Добро пожаловать в виртуальный торговый центр WebMall!
+    %div.col-md-3
+      %div.row

@@ -1,0 +1,14 @@
+%div.container-fluid
+  %div.row
+    %div.col-md-8
+      %h3 Отредактируйте основную информацию о Вашем интернет-магазине
+      = simple_form_for @resource, url: store_path(title: @resource.title), method: :put do |f|
+        %p
+          = f.input :name, label: 'Название'
+        %p
+          = f.input :speciality, label: 'Специализация'
+        %p
+          = f.input :ware_type, label: 'Мы продаем', collection: Store::WARE_TYPES
+        %p
+          = link_to "Назад", profile_path(@user.profile), class: "btn btn-default"
+          = f.button :submit, 'Сохранить', class: "btn btn-primary"

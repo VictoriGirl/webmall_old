@@ -1,0 +1,48 @@
+%div.container-fluid
+  %div.row
+    %div.col-md-8
+      %table.table
+        %tr
+          %td
+            %b
+              = "Добро пожаловать, #{@resource.first_name} #{@resource.last_name}"
+        %tr
+          %td
+            = "Имя: #{@resource.first_name}"
+        %tr
+          %td
+            - if @resource.last_name.present?
+              = "Фамилия: #{@resource.last_name}"
+        %tr
+          %td
+            - if @resource.date_of_birth.present?
+              = "Дата рождения: #{@resource.date_of_birth.strftime("%m.%d.%Y")}"
+            - else
+              = "Дата рождения: Не указана"
+        %tr
+          %td
+            - if @resource.phone_number.present?
+              = "Номер телефона: #{@resource.phone_number}"
+            - else
+              = "Номер телефона: Не указан"
+        %tr
+          %td
+            - if @resource.country.present?
+              = "Страна: #{@resource.country}"
+            - else
+              = "Страна: Не указана"
+        %tr
+          %td
+            - if @resource.city.present?
+              = "Город: #{@resource.city}"
+            - else
+              = "Город: Не указан"
+        %tr
+          %td
+            - if @resource.adress.present?
+              = "Адрес: #{@resource.adress}"
+            - else
+              = "Адрес: Не указан"
+    %div.col-md-4
+      %p
+        = link_to "Редактировать профиль", edit_profile_path, class: "btn btn-default btn-block"

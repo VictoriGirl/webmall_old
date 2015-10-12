@@ -1,0 +1,43 @@
+%div.container-fluid
+  %div.row
+    = link_to "В офис", profile_path(@user.profile), class: "btn btn-default btn-sm"
+    = link_to "В магазин", store_path(@store.title), class: "btn btn-default btn-sm"
+    = link_to "К списку товаров", store_goods_path, class: "btn btn-default btn-sm"
+  %div.row
+    %div.col-md-8
+      %h4 Основная информация
+      %table.table
+        %tr
+          %td
+            %b
+              = @resource.name
+        %tr
+          %td
+            = "Категория: #{@resource.category}"
+        %tr
+          %td
+            = "Описание: #{@resource.description}"
+        %tr
+          %td
+            = "Стоимость в: #{Ware::CURRENCIES.key(@resource.currency)}"
+        %tr
+          %td
+            = "Измеряется в: #{Ware::UNITS.key(@resource.unit)}"
+        %tr
+          %td
+            - if @resource.last_buying_date.present?
+              = "В последний раз купили: #{@resource.last_buying_date}"
+            - else
+              = 'Этот товар еще никто не покупал'
+        %tr
+          %td
+            = "Всего покупок совершено: #{@resource.buying_count.to_i}"
+    %div.col-md-4
+      %div.row
+        %p
+          = link_to "Изменить информацию о товаре", edit_store_good_path(@store.title, @resource), class: "btn btn-default btn-block"
+        %p
+          = link_to "Удалить", store_good_path(@store.title, @resource), class: "btn btn-default", method: :delete, class: "btn btn-danger btn-block", data: { confirm: 'Вы уверены?' }
+        %br
+        %p
+          = link_to "Склад", store_ware_storages_path(@store.title, ware_id: @resource.id), class: "btn btn-default btn-block"

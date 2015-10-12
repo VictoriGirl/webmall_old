@@ -1,0 +1,70 @@
+%div.container-fluid
+  %div.row
+    = link_to "В офис", profile_path(@user.profile), class: "btn btn-default btn-sm"
+  %div.row
+    %div.col-md-8
+      %h4 Основная информация
+      %table.table
+        %tr
+          %td
+            %b
+              = @resource.name 
+        %tr
+          %td
+            = "Специализация: #{@resource.speciality}"
+        %tr
+          %td
+            = "Продаем: #{Store::WARE_TYPES.key(@resource.ware_type)}"
+        %tr
+          %td 
+            = "Открыт: #{@resource.date_of_opening.strftime("%m.%d.%Y")}"
+        %tr
+          %td
+            - if @resource.ware_type == 'goods'
+              = "Различных товаров в ассортименте: #{@resource.goods.count.to_i}"
+            - else
+              = "Различных услуг ассортименте #{@resource.services.count.to_i}"
+        %tr
+          %td
+            - if @resource.last_buying_date
+              = "Последняя покупка: #{@resource.last_buying_date.strftime("%m.%d.%Y")}"
+            - else
+              = "Последняя покупка: еще не совершалась"
+        %tr
+          %td
+            = "Всего покупок совершено: #{@resource.buying_count.to_i}"
+      - if @resource.pops.any?
+        %b Точки продаж
+        %p
+        = link_to 'Добавить', new_store_pop_path(@resource.title), class: "btn btn-default btn-xs"
+        %p
+        %div.panel.panel-default
+          %div.panel-body
+            %table.table
+              - @resource.pops.each do |pop|
+                %tr
+                  %td 
+                    = link_to "#{pop.name}", store_pop_path(@resource.title, pop)
+      - else
+        %b У вас еще нет ни одной точки продаж
+        = link_to 'Добавить', new_store_pop_path(@resource.title), class: "btn btn-default btn-sm"
+    %div.col-md-4
+      %div.row
+        %br
+        %p
+          = link_to "Редактировать", edit_store_path(@resource.title), class: "btn btn-default btn-block"
+        %p
+          = link_to "Удалить", store_path(@resource.title), method: :delete, class: "btn btn-danger btn-block", data: { confirm: 'Вы уверены?' }
+        %br
+        - if @resource.ware_type == 'goods'
+          %b Товары
+          %p
+            = link_to "Все товары", store_goods_path(@resource.title), class: "btn btn-success btn-block"
+          %p
+            = link_to "Добавить товар", new_store_good_path(@resource.title), class: "btn btn-success btn-block"
+        - elsif @resource.ware_type == 'service'
+          %b Услуги
+          %p
+            = link_to "Все услуги", store_services_path(@resource.title), class: "btn btn-success btn-block"
+          %p
+            = link_to "Добавить услугу", new_store_service_path(@resource.title), class: "btn btn-success btn-block"

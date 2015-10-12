@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.3'
 
 gem 'mongoid', '~> 4.0.2'
+gem 'pg'
 
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -11,7 +12,9 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'therubyracer'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails', '~> 3.2.0'
-gem 'bootstrap-will_paginate', '~> 0.0.10'
+gem 'will_paginate', '~> 3.0.7'
+gem 'will_paginate-bootstrap', '~> 1.0.1'
+gem 'will_paginate_mongoid', '~> 2.0.1'
 
 gem 'haml', '~> 4.0.6'
 gem 'erb2haml', group: :development
@@ -27,12 +30,22 @@ gem 'rubocop', '~> 0.33.0', require: false
 gem 'devise', '~> 3.5.1'
 gem 'devise-bootstrap-views', '~> 0.0.5'
 
-gem 'mongoid-slug', '~> 4.0.0'
+gem 'mongoid_search', '~> 0.3.2'
 
 group :development, :test do
   gem 'web-console', '~> 2.0'
   gem 'spring'
 end
+
+group :development do
+    gem 'capistrano',         require: false
+    gem 'capistrano-rbenv:',     require: false
+    gem 'capistrano-rails',   require: false
+    gem 'capistrano-bundler', require: false
+    gem 'capistrano3-puma',   require: false
+end
+
+gem 'puma'
 
 group :test do
   gem 'rspec-rails'

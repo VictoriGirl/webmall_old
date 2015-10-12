@@ -1,0 +1,68 @@
+%div.container-fluid
+  %div.row
+    = link_to "Назад в офис", profile_path(@user.profile), class: "btn btn-default btn-sm"
+    = link_to "Назад в магазин", store_path(@store.title), class: "btn btn-default btn-sm"
+  %div.row
+    %div.col-md-8
+      %h4 Основная информация
+      %table.table
+        %tr
+          %td
+            %b
+              = @resource.name
+        %tr
+          %td
+            = "Адрес: #{@resource.adress}, #{@resource.city}, #{@resource.country}"
+        %tr
+          %td
+            = "Время работы: с #{@resource.working_from} по #{@resource.working_till}"
+        %tr
+          %td
+            = "Оплата наличными:"
+            - if @resource.cash
+              = 'Да'
+            - else
+              = 'Нет'
+        %tr
+          %td
+            = "Оплата картой:"
+            - if @resource.card
+              = 'Да'
+            - else
+              = 'Нет'
+        %tr
+          %td
+            = "Описание: #{@resource.description}"
+      - if @resource.deliveries.any?
+        %b Способы доставки
+        %p
+        = link_to 'Добавить', new_store_pop_delivery_path(@store.title, @resource), class: "btn btn-default btn-xs"
+        %p
+        - @resource.deliveries.each do |d|
+          %div.panel.panel-default
+            %div.panel-body
+              %table.table
+                %tr
+                  - if @store.ware_type == 'goods'
+                    %td #{Delivery::TYPES.key(d.type)}
+                  - else
+                    %td Выезд
+                %tr
+                  %td #{d.description}
+                %tr
+                  %td
+                    = link_to 'Редактировать', edit_store_pop_delivery_path(@store.title, @resource, d), class: "btn btn-default btn-xs"
+                    = link_to 'Удалить', store_pop_delivery_path(@store.title, @resource, d), method: :delete, class: "btn btn-danger btn-xs", data: { confirm: 'Вы уверены?' }
+      - else
+        %b У вас еще нет ни одного способа доставки
+        %p
+        = link_to 'Добавить', new_store_pop_delivery_path(@store.title, @resource), class: "btn btn-default"
+    %div.col-md-4
+      %div.row
+        %p
+          = link_to "Редактировать", edit_store_pop_path(@store.title, @resource), class: "btn btn-default btn-block"
+        %p
+          = link_to "Удалить", store_pop_path(@store.title, @resource), method: :delete, class: "btn btn-danger btn-block", data: { confirm: 'Вы уверены?' }
+        %br
+        %p
+          = link_to "Склад", store_ware_storages_path(@store.title, pop_id: @resource.id), class: "btn btn-default btn-block"

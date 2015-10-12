@@ -1,0 +1,18 @@
+%div.container-fluid
+  %div.row
+    %div.col-md-8
+      %h3 Измените информацию об услуге
+      = simple_form_for [@store, @resource], method: :put, url: store_service_path(@store.title, @resource) do |f|
+        %p
+          = f.input :name, as: :string, label: 'Название'
+        %p
+          = f.input :category, as: :string, label: 'Категория услуги'
+        %p
+          = f.input :description, as: :string, label: 'Описание'
+        %p
+          = f.input :currency, as: :select, collection: Ware::CURRENCIES, selected: Ware::CURRENCIES.key('Руб'), label: 'Валюта'
+        %p
+          = f.input :keywords, as: :string, label: 'Ключевые слова', placeholder: "example1, example2, example3"
+        %p
+          = link_to "Назад", store_service_path(@store.title, @resource), class: "btn btn-default"
+          = f.button :submit, 'Готово', class: "btn btn-primary"

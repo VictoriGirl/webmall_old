@@ -1,0 +1,56 @@
+%div.container-fluid
+  %div.row
+    = link_to "В офис", profile_path(@user.profile), class: "btn btn-default btn-sm"
+    = link_to "В магазин", store_path(@store.title), class: "btn btn-default btn-sm"
+    - if @pop.present?
+      = link_to "К торговой точке", store_pop_path(@store.title, @pop), class: "btn btn-default btn-sm"
+    -elsif @ware.present? && @ware.ware_type == 'goods'
+      = link_to "К описанию товара", store_good_path(@store.title, @ware), class: "btn btn-default btn-sm"
+    - elsif @ware.present? && @ware.ware_type == 'service'
+      = link_to "К описанию услуги", store_service_path(@store.title, @ware), class: "btn btn-default btn-sm"
+  %div.row
+    %div.col-md-12
+      %div.row
+        %h4 Перечень товаров
+        - if @resource.any?
+          = will_paginate @resource, renderer: BootstrapPagination::Rails
+          %br
+            - @resource.each do |ws|
+              %div.input-group.input-group-sm
+                = simple_form_for [@store, ws], method: :put, url: store_ware_storage_path(@store.title, ws) do |f|
+                  - if @pop.present?
+                    = f.input :pop_id, as: :hidden, input_html: { value: "#{@pop.id.to_s}" }
+                  - if @ware.present?
+                    = f.input :ware_id, as: :hidden, input_html: { value: "#{@ware.id.to_s}" }
+                  %div.col-xs-1
+                    - if ws.ware.ware_type == 'goods'
+                      %b
+                        = link_to "#{ws.ware.name}", store_good_path(@store.title, ws.ware)
+                    - elsif ws.ware.ware_type == 'service'
+                      %b
+                        = link_to "#{ws.ware.name}", store_service_path(@store.title, ws.ware)
+                  %div.col-xs-3
+                    = f.input :price, as: :float, label: "Цена, #{Ware::CURRENCIES.key(ws.ware.currency)}"
+                    %b
+                  - if ws.ware.ware_type == 'goods'
+                    %div.col-xs-3
+                      = f.input :count, as: :integer, label: "Количество, #{Ware::UNITS.key(ws.ware.unit)}"
+                      %b
+                    %div.col-xs-2
+                      - if ws.count.to_i > 0
+                        = 'В наличии'
+                      - else
+                        = 'Нет в наличии'
+                  - else
+                    %div.col-xs-2
+                      = f.input :in_sight, as: :boolean, label: 'В наличии'
+                  %div.col-xs-2
+                    = link_to "#{ws.store.name}", store_path(@store.title)
+                    %br
+                    = link_to "#{ws.pop.name}", store_pop_path(@store.title, ws.pop)
+                  %div.col-xs-1
+                    = f.button :submit, 'Изменить', class: "btn btn-primary btn-xs"
+              %br
+        - else
+          %b На складе еще нет товаров.
+          %p Чтобы добавить товар, вернитесь в свой магазин.
